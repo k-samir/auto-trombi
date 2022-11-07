@@ -1,11 +1,15 @@
-import { useState } from 'react'
-import './App.scss'
+import { Route, Routes } from "react-router-dom";
+import "./App.scss";
+import Index from "./components/Index/Index";
+import Login from "./components/Login/Login";
 
 const App = () => {
-  
   return (
-   <p>Hello</p>
-  )
-}
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/index" element={<Index />} />
+    </Routes>
+  );
+};
 
-export default App
+export default App;
