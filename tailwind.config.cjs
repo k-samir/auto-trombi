@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        "comfortaa": ["Comfortaa", "cursive"],
+      },
+    },
   },
-  plugins: [],
-}
+  daisyui: {
+    themes: ["dark","light"],
+  },
+  plugins: [require("daisyui"), require("@tailwindcss/typography")],
+};
