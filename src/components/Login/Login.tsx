@@ -10,9 +10,8 @@ const Login = () => {
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
-    navigate('/index');
+    navigate('/dashboard');
   };
-
 
   return (
     <div className="rounded-lg bg-white w-fit flex flex-col p-16 pt-12 gap-10">

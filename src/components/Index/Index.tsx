@@ -1,7 +1,10 @@
+import "./Index.scss";
 
 const Index = () => {
   return (
-       <p>Index</p>
+    <div>
+      <p>Index</p>
+    </div>
   );
 };
 
