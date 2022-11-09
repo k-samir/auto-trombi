@@ -1,6 +1,5 @@
-import { FaLock, FaUser, FaIdBadge } from "react-icons/fa";
+import { FaIdBadge, FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { Input } from "antd";
 
 import "./SignUp.scss";
 const SignUp = () => {
@@ -12,7 +11,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="rounded-lg bg-white w-fit flex flex-col p-16 pt-12 gap-10">
+    <div className="centered text-center rounded-lg bg-white h-fit w-fit flex flex-col p-16 pt-12 gap-10">
       <h1 className="font-comfortaa font-extrabold text-neutral">Sign Up</h1>
 
       <form className="flex flex-col flex-1 gap-2" onSubmit={handleSubmit}>

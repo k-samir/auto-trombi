@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { FaGithub } from "react-icons/fa";
+import { FaGithub, FaSignInAlt } from "react-icons/fa";
+import { TiUserAdd } from "react-icons/ti";
 
 import "./NavBar.scss";
 
@@ -11,10 +12,10 @@ const NavBar = (props: Props) => {
   const children = props.children;
 
   return (
-    <div className="drawer w-[80%]">
+    <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
-        <div className="navbar bg-primary  rounded-b-lg">
+        <div className="navbar bg-primary rounded-b-lg w-[75%] self-center">
           <div className="navbar-start">
             <div className="flex-none lg:hidden">
               <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
@@ -34,55 +35,30 @@ const NavBar = (props: Props) => {
               </label>
             </div>
 
-            <a
-              href="/"
-              className="px-4 normal-case text-lg font-comfortaa text-white whitespace-nowrap"
-            >
-              auto-trombi
-            </a>
+            <a href="/" className="px-4 normal-case text-lg font-comfortaa text-white whitespace-nowrap">auto-trombi</a>
           </div>
           <div className="navbar-center hidden lg:flex"></div>
 
           <div className="navbar-end gap-5 px-4  ">
             <div className=" self-center hidden lg:flex gap-5">
-              <a
-                href="/"
-                className="border-0 text-white hover:bg-transparent hover:text-white/40 capitalize text-md py-1"
-              >
-                Sign in
-              </a>
-              <a
-                href="/signup"
-                className="border-solid text-white border-[1px] rounded-md hover:bg-white/40 hover:border-white capitalize h-fit text-md px-2 py-1 "
-              >
-                Sign up
-              </a>
+              <a href="/" className="border-0 text-white hover:bg-transparent hover:text-white/40 capitalize text-md py-1">Sign in</a>
+              <a href="/signup" className=" text-white border-[1px] rounded-md hover:bg-white/40 capitalize px-2 py-1">Sign up</a>
             </div>
-            <a
-              className="flex self-center"
-              href="https://github.com/k-samir/auto-trombi"
-            >
+            <a className="flex self-center" href="https://github.com/k-samir/auto-trombi">
               <FaGithub size={33} color="white" />
             </a>
           </div>
         </div>
 
-        <div>{children}</div>
+        {children}
+        
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay">
           <div className="absolute top-0 left-0 h-full w-72 bg-base-100 flex flex-col">
             <ul className="menu p-4 gap-2">
-              <li>
-                <a href="/" className="btn">
-                  Sign in
-                </a>
-              </li>
-              <li>
-                <a href="/signup" className="btn">
-                  Sign up
-                </a>
-              </li>
+              <li><a href="/" className="btn bg-primary text-white"> <FaSignInAlt/> Sign in</a></li>
+              <li><a href="/signup" className="btn bg-primary text-white"> <TiUserAdd/> Sign up</a></li>
             </ul>
           </div>
         </label>
