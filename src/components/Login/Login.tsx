@@ -2,16 +2,24 @@ import { FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import "./Login.scss";
+
+
 const Login = () => {
+
   const navigate = useNavigate();
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event:any) => {
     event.preventDefault();
-    navigate("/dashboard");
-  };
+    try {
+      navigate("/dashboard");
+    } catch ({ response }) {
+      console.log(response);
+    }
+  }
 
+ 
   return (
-    <div className="centered text-center rounded-lg bg-white w-fit h-fit flex flex-col p-16 pt-12 gap-10">
+    <div className="self-center text-center rounded-lg bg-white w-fit h-fit flex flex-col p-16 pt-12 gap-10">
       <h1 className="font-comfortaa font-extrabold text-neutral">Sign In</h1>
       <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
         <div className="">
@@ -53,4 +61,3 @@ const Login = () => {
 };
 
 export default Login;
-// <Input size="large" placeholder="large size" prefix={ <FaUser />} />
