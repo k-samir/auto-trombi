@@ -1,5 +1,6 @@
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, ReactNode, useContext, useState } from "react";
+import jwtDecode from "jwt-decode";
+import { Fragment, ReactNode, useContext, useEffect, useState } from "react";
 import { BiLogOut } from "react-icons/bi";
 import { FaGithub, FaSignInAlt, FaUserCircle } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
@@ -7,6 +8,7 @@ import { Link } from "react-router-dom";
 
 import Auth from "../../contexts/Auth";
 import { logout } from "../../services/AuthApi";
+import { getItem } from "../../services/LocaleStorage";
 
 import "./NavBar.scss";
 
@@ -17,10 +19,11 @@ interface Props {
 const NavBar = (props: Props) => {
 
   const [sideVisibility,setSideVisibility] = useState<boolean>(false);
-  //const {connectedUser} = useContext(Auth) ;
-
   const children = props.children;
   const { isAuthenticated,setIsAuthenticated } = useContext(Auth);
+  
+  const [firstname,setFirstname] = useState<string>("");
+  const [lastname,setLastname] = useState<string>("");
 
   const toggleSideVisibility = () => {
     setSideVisibility(!sideVisibility);
@@ -31,7 +34,14 @@ const NavBar = (props: Props) => {
     setIsAuthenticated(false);
   }
   
-
+  useEffect(() => {
+    if(isAuthenticated == true){  
+      const token = getItem("authToken");
+      const data:any = jwtDecode(token!);
+      setFirstname(data.firstname);
+      setLastname(data.lastname);
+    }
+  },[isAuthenticated])
   
 
   return (
@@ -91,11 +101,11 @@ const NavBar = (props: Props) => {
                     className="flex gap-3
                   "
                   >
-                    <span /* {user.firstname} {user.lastname} */ className="self-center">NAME NAME</span>
+                    <span className="self-center">{firstname} {lastname}</span>
                     <Menu.Button>
                       <div className="avatar online placeholder">
                         <div className="bg-base-100 text-neutral-content rounded-full hover:text-black p-1 hover:bg-white/80 w-[40px]">
-                          <span /*{user.firstname!.charAt(0) }{user.lastname!.charAt(0) }*/className="text-md">SK</span>
+                          <span className="text-md">{firstname.charAt(0) }{lastname.charAt(0)}</span>
                         </div>
                       </div>
                     </Menu.Button>

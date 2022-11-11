@@ -12,10 +12,9 @@ import Auth from "./contexts/Auth";
 import { hasAuthenticated } from "./services/AuthApi";
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
-  const [connectedUser, setConnectedUser] = useState({});
 
   return (
-    <Auth.Provider value={{ isAuthenticated, setIsAuthenticated,connectedUser, setConnectedUser }}>
+    <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       <div className="flex justify-center">
         <NavBar>
           <div className="flex flex-1 centered">

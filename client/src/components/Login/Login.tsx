@@ -1,34 +1,39 @@
-import { BaseSyntheticEvent, useContext, useEffect, useState } from "react";
+import { BaseSyntheticEvent, useContext, useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Auth from "../../contexts/Auth";
 import { User } from "../../models/User";
-import { getUser, login } from "../../services/AuthApi";
+import { login } from "../../services/AuthApi";
 
 import "./Login.scss";
 
 const Login = () => {
-  const [user, setUser] = useState<User>({});
-  const { isAuthenticated, setIsAuthenticated,setConnectedUser } = useContext(Auth);
-
-  const [loginError, setLoginError] = useState<boolean>(false);
-
+  const [user, setUser] = useState<any>({});
+  const { setIsAuthenticated } = useContext(Auth);
+  const [loginError, setLoginError] = useState<string>("");
+  const [isLoading,setIsLoading] = useState<boolean>(false);
+ 
   const navigate = useNavigate();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+
     try {
+      setIsLoading(true);
+      setLoginError("");
+
       const response = await login(user);
-      if (response){
-        setIsAuthenticated(response);
-        const connected = getUser(user);
-        setConnectedUser(connected!);
-        setLoginError(false);
+      setIsLoading(false);
+
+      if (response == true){
+        setIsAuthenticated(true);
+        setLoginError("");
         navigate("/dashboard");
       }
-      setIsAuthenticated(response);
-      setLoginError(true);
-      
+      else{
+      setIsAuthenticated(false);
+      setLoginError(response);
+      }
     } catch ({ response }) {
       console.log(response);
     }
@@ -43,18 +48,12 @@ const Login = () => {
     setUser(temp);
   };
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      try {
-        navigate("/dashboard");
-      } catch ({ response }) {
-        console.log(response);
-      }
-    }
-  }, []);
+
+
+ 
 
   return (
-    <div className="self-center text-center rounded-lg bg-white w-fit h-fit flex flex-col p-16 pt-12 gap-10">
+    <div className="self-center text-center rounded-lg bg-white w-fit h-fit flex flex-col p-16 pt-12 gap-5">
       <h1 className="font-comfortaa font-extrabold text-neutral">Sign In</h1>
       <form className="flex flex-col w-fit gap-2 self-center" onSubmit={handleSubmit}>
         <div className="">
@@ -91,15 +90,14 @@ const Login = () => {
           </label>
         </div>
 
-        <button className="btn btn-primary" type="submit">
+        <button className={`btn btn-primary ${isLoading ? "loading"  :"" }`} type="submit">
           Log In
         </button>
 
        
       </form>
-      {loginError === true && (
 
-
+      {loginError != "" && (
           <div className="flex alert alert-error shadow-lg">
             <div>
               <svg
@@ -115,12 +113,20 @@ const Login = () => {
                   d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>The username or password you entered is incorect.</span>
+              <span>{loginError}</span>
             </div>
           </div>
         )}
+         
+         <div className="divider m-0">OR</div>
+          <div className=" text-neutral flex gap-2 flex-1 self-center">
+            
+        <p>Need an account?</p>
+        <a className="link text-primary" href="/signup">SIGN UP</a>
+      </div>
     </div>
   );
 };
+
 
 export default Login;
