@@ -59,3 +59,14 @@ export const tokenIsValid = (token: any) => {
   }
   return false;
 };
+
+export const getUser = async (id: string) => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+    params: { id: id}
+  };
+  
+  const res = await axios.get("http://localhost:3000/getUser",config);
+  return res.data.user;
+};

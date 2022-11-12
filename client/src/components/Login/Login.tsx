@@ -9,6 +9,7 @@ import "./Login.scss";
 
 const Login = () => {
   const [user, setUser] = useState<any>({});
+
   const { setIsAuthenticated } = useContext(Auth);
   const [loginError, setLoginError] = useState<string>("");
   const [isLoading,setIsLoading] = useState<boolean>(false);

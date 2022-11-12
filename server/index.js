@@ -4,11 +4,12 @@ const morgan = require("morgan");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 var fs = require("fs");
+const authMiddle = require("./helpers/auth");
 
-const PORT = 3000;
-const SECRET = "mykey";
 
 const app = express();
+const dotenv = require('dotenv');
+dotenv.config();
 
 app.use(cors());
 app.use(morgan("tiny"));
@@ -18,11 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 const generateToken = (user) => {
   const token = jwt.sign(
     {
-      username: user.username,
-      firstname: user.firstname,
-      lastname: user.lastname,
+      id : user.id
     },
-    SECRET,
+    process.env.SECRET_KEY,
     { expiresIn: "20 minutes" }
   );
   return token;
@@ -67,7 +66,7 @@ app.post("/signup", (req, res) => {
   );
 
   if (!duplicate) {
-    let user = {
+    const user = {
       id: uuidv4(),
       firstname: req.body.firstname.value,
       lastname: req.body.lastname.value,
@@ -97,10 +96,26 @@ app.post("/signup", (req, res) => {
   return res.status(409).json({ message: "Username already exists." });
 });
 
+app.get("/getUser",authMiddle,(req,res) => {
+  
+  let data = JSON.parse(fs.readFileSync("data.json"));
+  const user = data.users.find(
+    (user) => user.id == req.query.id
+  );
+
+  if(user){
+    const { password, ...restObject } = user;
+    return res.send({user : restObject});
+  }
+  return res.status(404).json({
+    message: "User not found",
+  });})
+
+
 app.get("*", (req, res) => {
   return res.status(404).json({ message: "Page not found" });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}.`);
 });
