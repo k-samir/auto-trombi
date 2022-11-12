@@ -16,7 +16,7 @@ const Wrapper = (props: Props) => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
   const [sideVisibility, setSideVisibility] = useState<boolean>(false);
 
-
+  const year = new Date().getFullYear();
   // const loggedUser = UseGetLoggedUser();
 
   const handleLogOut = () => {
@@ -29,8 +29,6 @@ const Wrapper = (props: Props) => {
     setSideVisibility(!sideVisibility);
   };
 
-
-
   return (
     <div className="drawer">
       <input
@@ -40,14 +38,23 @@ const Wrapper = (props: Props) => {
         checked={sideVisibility}
         onChange={toggleSideVisibility}
       />
-      <div className="drawer-content flex flex-col place-content-center">
-        <NavBar handleLogOut={handleLogOut}/>
+      <div className="drawer-content flex flex-col">
+        <NavBar handleLogOut={handleLogOut} />
         {children}
-      </div>
       
-        <SideNav toggleSideVisibility={toggleSideVisibility} handleLogOut={handleLogOut} />
+      </div>
+
+      <SideNav
+        toggleSideVisibility={toggleSideVisibility}
+        handleLogOut={handleLogOut}
+      />
     </div>
   );
 };
 
 export default Wrapper;
+/*  <footer className="footer footer-center p-4 bg-primary text-base-content">
+          <div>
+            <p>© {year} - Samir KAMAR</p>
+          </div>
+        </footer>*/

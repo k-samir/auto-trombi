@@ -20,7 +20,7 @@ const NavBar = (props: Props) => {
   const user: User = useGetLoggedUser();
 
   return (
-    <div className="navbar bg-primary rounded-b-lg md:w-[82%] lg:w-[70%] self-center ">
+    <div className="z-50 navbar bg-primary rounded-b-lg md:w-[82%] lg:w-[70%] self-center ">
       <div className="navbar-start">
         <div className="flex-none md:hidden">
           <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
