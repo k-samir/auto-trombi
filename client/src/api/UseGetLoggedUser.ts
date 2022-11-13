@@ -15,7 +15,6 @@ const useGetLoggedUser = () => {
       const decode: any = jwtDecode(token!);
       getUser(decode.id).then((response) => setUser(response));
     }
-    console.log(user);
   },[isAuthenticated])
 
   return user;

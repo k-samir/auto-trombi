@@ -1,18 +1,36 @@
+import { useEffect } from "react";
+import uuid from 'react-uuid';
+import { SubGroup } from "../../models/SubGroup";
 
-import { v4 as uuidv4 } from 'uuid';
-
-const Trombi = () => {
-    let array: Array<Number> = new Array(20).fill("hello");
+type Props = {
+  selectedGroup: SubGroup;
+};
+const Trombi = (props: Props) => {
+  const { selectedGroup } = props;
+  useEffect(() => {
+    console.log(selectedGroup);
+  }, []);
 
   return (
+    <div className="sm:w-[70%] rounded-box bg-neutral ">
+      <div className="pl-5 text-sm breadcrumbs">
+        <ul>
+          <li>{selectedGroup.parent}</li>
+          <li>{selectedGroup.name}</li>
+        </ul>
+      </div>
 
-    <div className=" w-[70%] bg-white">
-      <div className="flex flex-wrap gap-8 justify-center  p-5 ">
-        {array.map(() => (
-          <div key={uuidv4()} className="h-[10rem] w-[10rem] rounded-lg bg-base-100 shadow-xl ">
-            <img src="https://placeimg.com/400/225/arch" />
-            <div className="flex flex-row">
-              <h2 className="">NAME NAME</h2>
+      <div className="flex flex-wrap  gap-7 justify-center  p-5 ">
+        {selectedGroup.membersId?.map(() => (
+          <div key={uuid()} className="rounded-xl bg-base-content h-40 w-40 ">
+            <img
+              className="rounded-t-xl "
+              src="https://placeimg.com/400/225/arch"
+            />
+            <div className="flex place-content-center flex-col flex-1  items-center  text-black">
+              <h3>lastname</h3>
+              <h2>firstname</h2>
+              <p> {selectedGroup.name}</p>
             </div>
           </div>
         ))}

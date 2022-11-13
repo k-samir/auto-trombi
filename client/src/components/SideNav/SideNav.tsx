@@ -16,7 +16,7 @@ const SideNav = (props:Props) => {
   const { isAuthenticated } = useContext(Auth);
   
   return (
-    <div className="drawer-side">
+    <div className="drawer-side ">
 
     <label htmlFor="my-drawer-3" className="drawer-overlay">
       <div className="absolute top-0 left-0 h-full w-72 bg-base-100 flex flex-col">

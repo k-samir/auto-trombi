@@ -1,4 +1,4 @@
 
 export class SubGroup {
-    constructor(public name:string,public membersId: string[]) {}
+    constructor(public parent:string,public name:string,public membersId: string[]) {}
 }

@@ -3,14 +3,15 @@ import { Group } from "../../models/Group";
 import { SubGroup } from "../../models/SubGroup";
 
 type Props = {
-    groups : Group[]
+    groups : Group[];
+    selectedGroup:SubGroup;
+    handleSelectedGroupChange : (value:any) => void
 }
 const Groups = (props:Props) => {
-    const {groups} = props;
-  
+    const {groups,selectedGroup,handleSelectedGroupChange} = props;
 
   return (
-    <div className="flex w-[20%] items-stretch">
+    <div className="flex flex-col overflow-auto sm:w-[15%] sm:h-[calc(100vh-75px)] items-stretch sm:sticky top-[75px] z-2">
       <ul className="menu menu-compact lg:menu-normal bg-info-content  flex flex-1 p-2 rounded-box">
         {groups.map((group: Group, index: number) => {
           return (
@@ -18,9 +19,10 @@ const Groups = (props:Props) => {
               <li className="menu-title">
                 <span>{group.name}</span>
               </li>
-              {group.subGroups.map((sb: SubGroup) => {
+              {group.subGroups.map((sb: SubGroup,index:number) => {
                 return (
-                  <li className="bordered" >
+                  <li key={index} className={`${selectedGroup.name === sb.name ? "bordered" : ""}`} 
+                  onClick={() => handleSelectedGroupChange(sb)} >
                     <a>{sb.name}</a>
                   </li>
                 );

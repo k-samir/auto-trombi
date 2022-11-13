@@ -20,7 +20,7 @@ const NavBar = (props: Props) => {
   const user: User = useGetLoggedUser();
 
   return (
-    <div className="z-50 navbar bg-primary rounded-b-lg md:w-[82%] lg:w-[70%] self-center ">
+    <div className="sm:sticky top-0 z-50 navbar bg-primary rounded-b-lg md:w-[82%] lg:w-[70%] self-center ">
       <div className="navbar-start">
         <div className="flex-none md:hidden">
           <label htmlFor="my-drawer-3" className="btn btn-square btn-ghost">
@@ -50,8 +50,8 @@ const NavBar = (props: Props) => {
       <div className="navbar-center hidden md:flex"></div>
 
       <div className="navbar-end px-4">
-        <div className=" self-center hidden md:flex gap-3">
-          <a
+        <div className="self-center hidden md:flex gap-3">
+        <a
             href="https://github.com/k-samir/auto-trombi"
             className="rounded-lg bg-base-100 p-1 "
           >
