@@ -66,7 +66,18 @@ export const getUser = async (id: string) => {
     headers: { Authorization: `Bearer ${token}` },
     params: { id: id}
   };
-  
+
   const res = await axios.get("http://localhost:3000/getUser",config);
   return res.data.user;
 };
+
+export const getGroups = async () => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  
+  const res = await axios.get("http://localhost:3000/getGroups",config);
+  return res.data.groups;
+};
+

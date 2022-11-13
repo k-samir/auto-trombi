@@ -1,15 +1,6 @@
 import { Credentials } from "./Credentials";
+import { Person } from "./Person";
 
-export class User {
-    id?:number
-    firstname?:string;
-    lastname?:string;
-    credentials?:Credentials;
-    
-    constructor(firstname:string,lastname:string,credentials:Credentials) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.credentials = credentials;
-    }
-
+export class User implements Person {
+    constructor(public id:string,public firstname:string, public lastname:string,credentials:Credentials) {}
 }

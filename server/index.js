@@ -112,6 +112,21 @@ app.get("/getUser",authMiddle,(req,res) => {
   });})
 
 
+  app.get("/getGroups",authMiddle,(req,res) => {
+  
+    let data = JSON.parse(fs.readFileSync("data.json"));
+    
+    const groups = data.groups;
+    if(groups){
+      return res.send({groups : groups});
+    }
+    return res.status(404).json({
+      message: "Groups not found",
+    });})
+  
+
+
+
 app.get("*", (req, res) => {
   return res.status(404).json({ message: "Page not found" });
 });

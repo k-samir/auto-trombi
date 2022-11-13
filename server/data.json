@@ -1,11 +1,52 @@
 {
-  "users": [
+  "users": [{
+    "id": "1",
+    "firstname": "Samir",
+    "lastname": "Kamar",
+    "username": "o",
+    "password": "o"
+  }],
+  "groups": [
     {
-      "id": "1",
-      "firstname": "Samir",
-      "lastname": "Kamar",
-      "username": "o",
-      "password": "o"
-    }
-  ]
+    "owner": "1",
+    "name": "FIL",
+    "subGroups": [
+      {
+        "name": "FIL A1",
+        "membersId": ["1"]
+      },
+      {
+        "name": "FIL A2",
+        "membersId": ["1"]
+      },{
+        "name": "FIL A3",
+        "membersId": ["1"]
+      }
+    ]
+  }, {
+    "owner": "1",
+    "name": "FISE",
+    "subGroups": [
+      {
+        "name": "FISE A1",
+        "membersId": ["1"]
+      },
+      {
+        "name": "FISE A2",
+        "membersId": ["1"]
+      },{
+        "name": "FISE A3",
+        "membersId": ["1"]
+      }
+    ]
+  }
+],
+  "members": [{
+    "id": "1",
+    "firstname": "Samir",
+    "lastname": "Kamar",
+    "company": "Thales",
+    "picture": "",
+    "companyLogo": ""
+  }]
 }
