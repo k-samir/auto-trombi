@@ -81,3 +81,14 @@ export const getGroups = async () => {
   return res.data.groups;
 };
 
+export const getMember = async (id: string) => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+    params: { id: id}
+  };
+
+  const res = await axios.get("http://localhost:3000/getMember",config);
+  return res.data.member;
+};
+

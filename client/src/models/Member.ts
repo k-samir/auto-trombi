@@ -5,8 +5,8 @@ export class Member implements Person {
     public id: string,
     public firstname: string,
     public lastname: string,
-    company: string,
-    picture: string,
-    companyLogo: string
+    public company: string,
+    public picture: string,
+    public companyLogo: string
   ) {}
 }

@@ -111,6 +111,23 @@ app.get("/getUser",authMiddle,(req,res) => {
     message: "User not found",
   });})
 
+  app.get("/getMember",authMiddle,(req,res) => {
+  
+    let data = JSON.parse(fs.readFileSync("data.json"));
+    console.log(req.query.id);
+    const member = data.members.find(
+      (member) => member.id == req.query.id
+    );
+  
+    if(member){
+      return res.send({member : member});
+    }
+    return res.status(404).json({
+      message: "Member not found",
+    });
+  
+  })
+  
 
   app.get("/getGroups",authMiddle,(req,res) => {
   
