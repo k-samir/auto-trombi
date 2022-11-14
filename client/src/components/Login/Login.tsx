@@ -1,4 +1,4 @@
-import { BaseSyntheticEvent, useContext, useState } from "react";
+import { BaseSyntheticEvent, useContext, useEffect, useState } from "react";
 import { FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Auth from "../../contexts/Auth";
@@ -10,11 +10,21 @@ import "./Login.scss";
 const Login = () => {
   const [user, setUser] = useState<any>({});
 
-  const { setIsAuthenticated } = useContext(Auth);
+  const {isAuthenticated, setIsAuthenticated } = useContext(Auth);
   const [loginError, setLoginError] = useState<string>("");
   const [isLoading,setIsLoading] = useState<boolean>(false);
  
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      try {
+        navigate("/dashboard");
+      } catch ({ response }) {
+        console.log(response);
+      }
+    }
+  }, []);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -25,7 +35,6 @@ const Login = () => {
 
       const response = await login(user);
       setIsLoading(false);
-
       if (response == true){
         setIsAuthenticated(true);
         setLoginError("");
