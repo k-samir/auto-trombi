@@ -20,8 +20,7 @@
             "1",
             "2",
             "3",
-            "4",
-            "1"
+            "4"
           ]
         },
         {
@@ -73,35 +72,35 @@
   "members": [
     {
       "id": "1",
-      "firstname": "Samir",
-      "lastname": "Kamar",
+      "firstname": "Marc-André",
+      "lastname": "ter Stegen",
       "company": "Thales",
-      "picture": "https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=",
-      "companyLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Thales_Logo.svg/2560px-Thales_Logo.svg.png"
+      "picture": "https://www.fcbarcelona.com/photo-resources/2022/11/02/041148f0-ed52-4375-940f-8201f3b5cde1/mini_01-MARC-ANDRE_TER_STEGEN.png?width=670&height=790",
+      "companyLogo": "https://www.joptimisemonsite.fr/wp-content/uploads/2015/02/logo-amazon.jpg"
     },
     {
       "id": "2",
-      "firstname": "Samir",
-      "lastname": "Kamar",
+      "firstname": "Pedri",
+      "lastname": "González",
       "company": "Thales",
-      "picture": "https://cdn-icons-png.flaticon.com/512/147/147142.png ",
-      "companyLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Meta-Logo.png/2560px-Meta-Logo.png"
+      "picture": "https://www.fcbarcelona.com/photo-resources/2022/11/02/b6748d23-c5f6-47d2-8cc2-9fcebff5e0a1/mini_08-PEDRI.png?width=670&height=790",
+      "companyLogo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Google_logo_%282010-2013%29.svg/2560px-Google_logo_%282010-2013%29.svg.png"
     },
     {
       "id": "3",
-      "firstname": "Samir",
-      "lastname": "Kamar",
+      "firstname": "Ousmane",
+      "lastname": "Dembélé",
       "company": "Thales",
-      "picture": "https://cdn-icons-png.flaticon.com/512/194/194938.png",
-      "companyLogo": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
+      "picture": "https://www.fcbarcelona.com/photo-resources/2022/11/02/bc8fc008-858c-4df2-851a-a7deb546a4d7/mini_07-OUSMANE_DEMBELE.png?width=670&height=790",
+      "companyLogo": "https://www.1min30.com/wp-content/uploads/2018/04/Embl%C3%A8me-IBM.jpg"
     },
     {
       "id": "4",
-      "firstname": "Samir",
-      "lastname": "Kamar",
+      "firstname": "Robert",
+      "lastname": "Lewandowski",
       "company": "Thales",
-      "picture": "https://cdn-icons-png.flaticon.com/512/147/147133.png",
-      "companyLogo": "https://www.pngmart.com/files/10/Apple-Logo-PNG-Photos.png"
+      "picture": "https://www.fcbarcelona.com/photo-resources/2022/11/02/9b93a4c7-2ec5-4409-b08e-e551b1c983df/mini_09-ROBERT_LEWANDOWSKI.png?width=670&height=790",
+      "companyLogo": "https://www.1min30.com/wp-content/uploads/2017/09/logo-microsoft-scaled.jpg"
     }
   ]
 }
