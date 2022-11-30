@@ -1,16 +1,16 @@
 import { BaseSyntheticEvent, useContext, useEffect, useState } from "react";
-import { FaIdBadge, FaLock, FaUser } from "react-icons/fa";
+import { FaEye, FaIdBadge, FaLock, FaUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Auth from "../../contexts/Auth";
 import { Credentials } from "../../models/Credentials";
 import { User } from "../../models/User";
 import { signup } from "../../services/AuthApi";
-
 import "./SignUp.scss";
+
 const SignUp = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<any>({});
-  const [isLoading,setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
   const [signupError, setSignupError] = useState<string>("");
@@ -58,6 +58,11 @@ const SignUp = () => {
     setUser(userTemp);
   };
 
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const togglePassword = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       try {
@@ -69,19 +74,19 @@ const SignUp = () => {
   }, []);
 
   return (
-    <div className="self-center justify-center text-center rounded-lg bg-white h-fit w-fit flex flex-col p-16 pt-12 gap-5">
+    <div className="self-center justify-center text-center rounded-lg  h-fit w-fit flex flex-col p-16 pt-12 gap-5 border border-1">
       <h1 className="font-comfortaa font-extrabold text-neutral">Sign Up</h1>
 
       <form
         className="flex flex-col w-fit self-center flex-1 gap-2"
         onSubmit={handleSubmit}
       >
-        <div className="flex gap-2">
-          <label className="input-group input-group-md">
+        <div className="flex flex-1 gap-2">
+          <label className="flex flex-1 input-group input-group-md">
             <span>
               <FaIdBadge />
             </span>
-            <div>
+            <div className="flex flex-col flex-1 h-24">
               <input
                 required
                 type="text"
@@ -100,6 +105,7 @@ const SignUp = () => {
               />
             </div>
           </label>
+
         </div>
 
         <div className="">
@@ -126,16 +132,27 @@ const SignUp = () => {
 
             <input
               required
-              type="password"
+              type={passwordVisible ? "text" : "password"}
+              name="password"
               placeholder="Password"
               className="input input-bordered input-md"
               onChange={handleChangeCredentials}
-              name="password"
             />
+            <button
+              type="button"
+              onClick={togglePassword}
+              className="btn btn-primary"
+            >
+              {" "}
+              <FaEye className="flex self-center" />
+            </button>
           </label>
         </div>
 
-        <button className={`btn btn-primary ${isLoading ? "loading"  :"" }`} type="submit">
+        <button
+          className={`btn btn-primary ${isLoading ? "loading" : ""}`}
+          type="submit"
+        >
           Sign Up
         </button>
       </form>
@@ -160,7 +177,7 @@ const SignUp = () => {
           </div>
         </div>
       )}
-      
+
       <div className="divider m-0">OR</div>
 
       <div className=" text-neutral flex gap-2 flex-1 self-center">
