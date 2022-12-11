@@ -8,7 +8,7 @@ const AuthenticatedRoute = () => {
     
     const { isAuthenticated } = useContext(Auth);
     useEffect(()=> {
-        console.log(isAuthenticated);
+        //console.log(isAuthenticated);
     },[])
     return isAuthenticated ? <Outlet /> : <Navigate to="/login" />
 }

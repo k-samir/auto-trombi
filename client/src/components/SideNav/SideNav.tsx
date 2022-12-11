@@ -19,14 +19,14 @@ const SideNav = (props:Props) => {
     <div className="drawer-side ">
 
     <label htmlFor="my-drawer-3" className="drawer-overlay">
-      <div className="absolute top-0 left-0 h-full w-72 bg-base-100 flex flex-col">
+      <div className="absolute top-0 left-0 h-full w-72  flex flex-col">
         <ul className="menu p-4 gap-2">
           {(!isAuthenticated && (
             <>
               <li>
                 <Link
                   to="/login"
-                  className="btn bg-primary text-white"
+                  className="btn  text-white"
                   onClick={toggleSideVisibility}
                 >
                   {" "}
@@ -36,7 +36,7 @@ const SideNav = (props:Props) => {
               <li>
                 <Link
                   to="/signup"
-                  className="btn bg-primary text-white"
+                  className="btn  text-white"
                   onClick={toggleSideVisibility}
                 >
                   <TiUserAdd /> Sign up
@@ -48,7 +48,7 @@ const SideNav = (props:Props) => {
               <li>
                 <Link
                   to="/profile"
-                  className="btn bg-primary text-white"
+                  className="btn  text-white"
                   onClick={toggleSideVisibility}
                 >
                   {" "}
@@ -57,7 +57,7 @@ const SideNav = (props:Props) => {
               </li>
               <li>
                 <button
-                  className="btn bg-primary text-white"
+                  className="btn  text-white"
                   onClick={handleLogOut}
                 >
                   {" "}

@@ -33,7 +33,7 @@ const SignUp = () => {
         setIsAuthenticated(false);
       }
     } catch ({ response }) {
-      console.log(response);
+      //console.log(response);
     }
   };
 
@@ -68,7 +68,7 @@ const SignUp = () => {
       try {
         navigate("/dashboard");
       } catch ({ response }) {
-        console.log(response);
+        //console.log(response);
       }
     }
   }, []);

@@ -15,13 +15,14 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  
   useEffect(() => {
     if (isAuthenticated) {
       try {
         navigate("/dashboard");
       } catch ({ response }) {
-        console.log(response);
+        //console.log(response);
       }
     }
   }, []);
@@ -44,7 +45,7 @@ const Login = () => {
         setLoginError(response);
       }
     } catch ({ response }) {
-      console.log(response);
+      //console.log(response);
     }
   };
 
@@ -57,10 +58,10 @@ const Login = () => {
     setUser(temp);
   };
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePassword = () => {
     setPasswordVisible(!passwordVisible);
   };
+  
 
   return (
     <div className="self-center text-center rounded-lg  w-fit h-fit flex flex-col p-16 pt-12 gap-5 border border-1">
