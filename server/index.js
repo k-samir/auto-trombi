@@ -125,8 +125,28 @@ app.get("/getUser",authMiddle,(req,res) => {
     return res.status(404).json({
       message: "Member not found",
     });
-  
   })
+
+  app.get("/getRemainingMembers",authMiddle,(req,res) => {
+  
+    let data = JSON.parse(fs.readFileSync("data.json"));
+    console.log(req.query.groupId);
+    console.log(req.query.subGroupId);
+
+    const group = data.groups.find((group) => group.id == req.query.groupId).subGroups;
+   
+    const memberInSubGroup = group.find((subgroup) => subgroup.id == req.query.subGroupId).membersId;
+
+    const remainingMembers = data.members.filter((member) => !memberInSubGroup.includes(member.id));
+
+    if(remainingMembers){
+      return res.send({remainingMembers : remainingMembers});
+    }
+    return res.status(404).json({
+      message: "Members not found",
+    });
+  })
+
   
 
   app.get("/getGroups",authMiddle,(req,res) => {
@@ -141,6 +161,54 @@ app.get("/getUser",authMiddle,(req,res) => {
       message: "Groups not found",
     });})
   
+    app.post("/addExistingMemberToSubGroup", (req, res) => {
+      let data = JSON.parse(fs.readFileSync("data.json"));
+    
+      if (
+        !req.body.groupId ||
+        !req.body.memberId ||
+        !req.body.subGroupId
+      ) {
+        return res.status(400).json({
+          message: "Error. Please make sure all fields are filled in correctly",
+        });
+      }
+
+      const groupId = req.body.groupId;
+      const subGroupId = req.body.subGroupId;
+      const memberId = req.body.memberId;
+
+      const group = data.groups.find((group) => group.id == groupId).subGroups;
+   
+      const memberInSubGroup = group.find((subgroup) => subgroup.id == subGroupId).membersId;
+      
+      const duplicate = memberInSubGroup.find(
+        (member) => member.id == memberId
+      );
+    
+      if (!duplicate) {
+            
+        fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+          if (err) {
+            console.log(err);
+          } else {
+            obj = JSON.parse(data);
+            obj.groups.find((group) => group.id == groupId).subGroups.find((subGroup) => subGroup.id == subGroupId).membersId.push(memberId);
+            json = JSON.stringify(obj);
+            fs.writeFile("data.json", json, "utf8", (err) => {
+              if (err) console.log(err);
+              else {
+                console.log(memberId + " added successfully");
+              }
+            });
+          }
+        });
+    
+        return res.status(200).json({ message: "Member added successfully" });
+      }
+    
+      return res.status(409).json({ message: "Member already in subgroup." });
+    });
 
 
 

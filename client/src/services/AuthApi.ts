@@ -92,3 +92,32 @@ export const getMember = async (id: string) => {
   return res.data.member;
 };
 
+export const getRemainingMembers = async (groupId:string,subGroupId:string) => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+    params: { groupId: groupId, subGroupId:subGroupId}
+  };
+  
+  const res = await axios.get("http://localhost:3000/getRemainingMembers",config);
+  return res.data.remainingMembers;
+};
+
+export const addExistingMemberToSubGroup = async (memberId:string,groupId:string,subGroupId:string) => {
+  return axios
+    .post("http://localhost:3000/addExistingMemberToSubGroup", {memberId,groupId,subGroupId})
+    .then((response) => response.data.token)
+    .catch(function (error) {
+      if (!error.response) {
+        return "Error: Network Error";
+      } else {
+        return error.response.data.message;
+      }
+    });
+};
+
+
+
+
+
+

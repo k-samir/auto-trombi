@@ -1,31 +1,30 @@
-import { useEffect } from "react";
 import uuid from "react-uuid";
+import { Group } from "../../models/Group";
 import { SubGroup } from "../../models/SubGroup";
 import MemberItem from "../MemberItem/MemberItem";
 
 type Props = {
-  selectedGroup: SubGroup;
+  selectedGroup: Group;
+  selectedSubGroup: SubGroup;
+  refetch:() => void
 };
 const Trombi = (props: Props) => {
-  const { selectedGroup } = props;
-  useEffect(() => {
-    console.log(selectedGroup);
-  }, []);
-
+  const { selectedGroup,selectedSubGroup,refetch } = props;
+  
   return (
-    <div className="sm:w-[70%] rounded-box bg-neutral ">
-      <div className="pl-5 text-sm breadcrumbs">
+    <div className="sm:w-[70%] rounded-box border border-1">
+      <div className="pl-5 text-sm breadcrumbs bg-base-200/40">
         <ul>
-          <li>{selectedGroup.parent}</li>
-          <li>{selectedGroup.name}</li>
+          <li>{selectedSubGroup.parent}</li>
+          <li>{selectedSubGroup.name}</li>
         </ul>
       </div>
 
       <div className="flex flex-wrap  gap-7 justify-center  p-5 ">
-        {selectedGroup.membersId?.map((id:string) => (
+        {selectedSubGroup.membersId?.map((id:string) => (
           <MemberItem key={uuid()} memberId={id}/>
         ))}
-        <MemberItem key={uuid()}/>
+        <MemberItem refetch={refetch} key={uuid()} groupId={selectedGroup.id} subGroupId={selectedSubGroup.id}/>
 
       </div>
     </div>

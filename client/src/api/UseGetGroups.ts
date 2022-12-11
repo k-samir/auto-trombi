@@ -7,13 +7,16 @@ const useGetGroups = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const { isAuthenticated } = useContext(Auth);
 
+  const [shouldRefetch, refetch] = useState({}); 
+
+
   useEffect(() => {
     if (isAuthenticated == true) {
       getGroups().then((response) => setGroups(response));
     }
-  },[isAuthenticated])
+  },[isAuthenticated,shouldRefetch])
 
-  return groups;
+  return [groups,refetch] as const;
 };
 
 export default useGetGroups;

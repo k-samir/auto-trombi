@@ -53,7 +53,7 @@ const Wrapper = (props: Props) => {
 };
 
 export default Wrapper;
-/*  <footer className="footer footer-center p-4 bg-primary text-base-content">
+/*  <footer className="footer footer-center p-4  text-base-content">
           <div>
             <p>© {year} - Samir KAMAR</p>
           </div>
