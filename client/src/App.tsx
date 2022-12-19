@@ -1,3 +1,4 @@
+import 'antd/dist/antd.css';
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
@@ -6,6 +7,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Index from "./components/Index/Index";
 import Login from "./components/Login/Login";
 import Profile from "./components/Profile/Profile";
+
 import SignUp from "./components/SignUp/SignUp";
 import Wrapper from "./components/Wrapper/Wrapper";
 import Auth from "./contexts/Auth";

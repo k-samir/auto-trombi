@@ -63,7 +63,9 @@ app.post("/signup", (req, res) => {
   }
 
   const duplicate = data.users.find(
-    (user) => user.username.toLowerCase() == req.body.credentials.username.value.toLowerCase()
+    (user) =>
+      user.username.toLowerCase() ==
+      req.body.credentials.username.value.toLowerCase()
   );
 
   if (!duplicate) {
@@ -186,7 +188,11 @@ app.post("/addNewMemberToSubGroup", (req, res) => {
   const groupId = req.body.groupId;
   const subGroupId = req.body.subGroupId;
 
-  const duplicate = data.members.find((member) => member.firstname.toLowerCase() == firstname.toLowerCase() && member.lastname.toLowerCase() == lastname.toLowerCase());
+  const duplicate = data.members.find(
+    (member) =>
+      member.firstname.toLowerCase() == firstname.toLowerCase() &&
+      member.lastname.toLowerCase() == lastname.toLowerCase()
+  );
 
   if (!duplicate) {
     fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
@@ -201,8 +207,8 @@ app.post("/addNewMemberToSubGroup", (req, res) => {
           lastname: lastname,
           company: company,
           picture: picture,
-          companyLogo: companyLogo
-        })
+          companyLogo: companyLogo,
+        });
 
         obj.groups
           .find((group) => group.id == groupId)
@@ -267,6 +273,58 @@ app.post("/addExistingMemberToSubGroup", (req, res) => {
   }
 
   return res.status(409).json({ message: "Member already in subgroup." });
+});
+
+app.delete("/removeMemberFromSubGroup", (req, res) => {
+  let data = JSON.parse(fs.readFileSync("data.json"));
+
+  if (!req.body.memberId || !req.body.groupId || !req.body.subGroupId) {
+    return res.status(400).json({
+      message: "Error. Please make sure all fields are filled in correctly",
+    });
+  }
+
+  const groupId = req.body.groupId;
+  const subGroupId = req.body.subGroupId;
+  const memberId = req.body.memberId;
+
+  const group = data.groups.find((group) => group.id == groupId).subGroups;
+  const memberInSubGroup = group.find(
+    (subgroup) => subgroup.id == subGroupId
+  ).membersId;
+
+  const index = memberInSubGroup.indexOf(memberId);
+
+  if (index !== -1) {
+    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        obj = JSON.parse(data);
+
+        console.log(obj.groups
+          .find((group) => group.id == groupId)
+          .subGroups.find((subGroup) => subGroup.id == subGroupId)
+          .membersId);
+
+
+        obj.groups
+          .find((group) => group.id == groupId)
+          .subGroups.find((subGroup) => subGroup.id == subGroupId)
+          .membersId.splice(index, 1);
+
+        json = JSON.stringify(obj);
+        fs.writeFile("data.json", json, "utf8", (err) => {
+          if (err) console.log(err);
+          else {
+            console.log(memberId + " removed successfully");
+          }
+        });
+      }
+    });
+    return res.status(200).json({ message: "Member removed successfully" });
+  }
+  return res.status(400).json({ message: "Page not found" });
 });
 
 app.get("*", (req, res) => {

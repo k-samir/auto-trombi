@@ -53,9 +53,9 @@ const NavBar = (props: Props) => {
         <div className="self-center hidden md:flex gap-3">
         <a
             href="https://github.com/k-samir/auto-trombi"
-            className="rounded-lg p-1 border border-1 hover:border-black"
+            className="rounded-lg p-1 border border-1 group hover:border-black"
           >
-            <FaGithub size={32} color="white" className="hover:fill-black " />
+            <FaGithub size={32} color="white" className="group-hover:fill-black"/>
           </a>
 
        
@@ -79,11 +79,11 @@ const NavBar = (props: Props) => {
           )) || (
             <>
               {" "}
-              <Link to="/dashboard" className="rounded-lg  p-1 border border-1 hover:border-black">
+              <Link to="/dashboard" className="rounded-lg  p-1 border border-1 group hover:border-black">
                 <AiOutlineDashboard
                   size={33}
                   color="white"
-                  className="self-center hover:fill-black "
+                  className="self-center group-hover:fill-black "
                 />
               </Link>
               <Menu as="div" className="relative text-left">
@@ -93,7 +93,7 @@ const NavBar = (props: Props) => {
                   </span>
                   <Menu.Button>
                     <div className="avatar online placeholder">
-                      <div className=" text-neutral-content rounded-full border border-1 hover:text-black p-1 hover:/80 w-[40px]">
+                      <div className=" text-neutral-content rounded-full border border-1 hover:text-black hover:border-black p-1 w-[40px]">
                         <span className="text-md">
                           {user.firstname ? user.firstname.charAt(0) : ""}
                           {user.lastname ? user.lastname.charAt(0) : ""}
@@ -111,7 +111,7 @@ const NavBar = (props: Props) => {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <Menu.Items className="bg-white absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="bg-white absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="px-1 py-1 ">
                       <Menu.Item>
                         {({ active }) => (
@@ -121,7 +121,7 @@ const NavBar = (props: Props) => {
                               active
                                 ? "bg-primary text-white"
                                 : "text-gray-900"
-                            } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                            } group flex w-full items-center rounded-md px-2 py-2 text-sm `}
                           >
                             {active ? (
                               <FaUserCircle

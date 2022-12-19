@@ -1,5 +1,4 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Upload } from "antd";
 import { Fragment } from "react";
 import { FaUser } from "react-icons/fa";
 import { IoLogoApple } from "react-icons/io5";
@@ -8,7 +7,6 @@ import { MdPhotoCamera, MdWork } from "react-icons/md";
 import useGetRemainingMembers from "../../api/UseGetRemainingMembers";
 import { Member } from "../../models/Member";
 import { addExistingMemberToSubGroup, addNewMemberToSubGroup } from "../../services/AuthApi";
-const { Dragger } = Upload;
 
 type Props = {
   groupId: string;
@@ -16,6 +14,7 @@ type Props = {
   show: boolean;
   closeModal: () => void;
   refetch: () => void;
+
 };
 const AddMemberModal = (props: Props) => {
   const { show, closeModal, groupId, subGroupId, refetch } = props;
