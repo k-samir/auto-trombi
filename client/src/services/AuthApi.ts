@@ -118,6 +118,21 @@ export const addExistingMemberToSubGroup = async (memberId:string,groupId:string
 
 
 
+export const addNewMemberToSubGroup = async (firstname:string,lastname:string,company:string,picture:string,companyLogo:string,groupId:string,subGroupId:string) => {
+  return axios
+    .post("http://localhost:3000/addNewMemberToSubGroup", {firstname,lastname,company,picture,companyLogo,groupId,subGroupId})
+    .then((response) => response.data.token)
+    .catch(function (error) {
+      if (!error.response) {
+        return "Error: Network Error";
+      } else {
+        return error.response.data.message;
+      }
+    });
+}
+
+
+
 
 
 

@@ -2,10 +2,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Upload } from "antd";
 import { Fragment } from "react";
 import { FaUser } from "react-icons/fa";
-import { MdWork } from "react-icons/md";
+import { IoLogoApple } from "react-icons/io5";
+import { MdPhotoCamera, MdWork } from "react-icons/md";
+
 import useGetRemainingMembers from "../../api/UseGetRemainingMembers";
 import { Member } from "../../models/Member";
-import { addExistingMemberToSubGroup } from "../../services/AuthApi";
+import { addExistingMemberToSubGroup, addNewMemberToSubGroup } from "../../services/AuthApi";
 const { Dragger } = Upload;
 
 type Props = {
@@ -22,6 +24,28 @@ const AddMemberModal = (props: Props) => {
     groupId ?? "1",
     subGroupId ?? "1"
   );
+
+  const handleAddNew = async (event: any) => {
+    event.preventDefault();
+ 
+    try {
+      const response = await addNewMemberToSubGroup(
+        event.target.firstname.value,
+        event.target.lastname.value,
+        event.target.company.value,
+        event.target.picture.value,
+        event.target.companyLogo.value,
+        groupId,
+        subGroupId
+      );
+
+      refetch();
+      closeModal();
+    } catch ({ response }) {
+      //console.log(response);
+    }
+  }
+
 
   const handleAddExisting = async (event: any) => {
     event.preventDefault();
@@ -99,6 +123,8 @@ const AddMemberModal = (props: Props) => {
                   </form>
                 )}
 
+<form onSubmit={handleAddNew}>
+
                 <div className="flex flex-col gap-2">
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Add new member
@@ -149,16 +175,50 @@ const AddMemberModal = (props: Props) => {
                     </label>
                   </div>
 
+                  <div className="">
+                    <label className="input-group input-group-md">
+                      <span>
+                        <MdPhotoCamera />
+                      </span>
+
+                      <input
+                        required
+                        type="text"
+                        name="picture"
+                        placeholder="Member Picture url"
+                        className="input input-bordered input-md"
+                      />
+                    </label>
+                  </div>
+
+                  <div className="">
+                    <label className="input-group input-group-md">
+                      <span>
+                        <IoLogoApple />
+                      </span>
+
+                      <input
+                        required
+                        type="text"
+                        name="companyLogo"
+                        placeholder="Company Logo url"
+                        className="input input-bordered input-md"
+                      />
+                    </label>
+                  </div>
+
                   <div className="flex flex-col"></div>
 
                   <button
-                    type="button"
+                    type="submit"
                     className=" w-[65%] self-center rounded-md border bg-blue-200 border-transparent  px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                     onClick={closeModal}
                   >
                     Add new Member
                   </button>
                 </div>
+                </form>
+
               </Dialog.Panel>
             </Transition.Child>
           </div>

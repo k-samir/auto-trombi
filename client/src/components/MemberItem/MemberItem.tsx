@@ -25,19 +25,19 @@ const MemberItem = (props: Props) => {
   if (memberId) {
     const member = useGetMember(memberId);
     return (
-      <div className=" rounded-lg items-center w-32 md:w-40 flex flex-col gap-2 border border-1">
-        <div className="w-28 md:w-[60%]">
-          <img className="mask mask-squircle /90" src={member?.picture} />
+      <div className=" rounded-lg items-center w-32 md:w-40 flex flex-col gap-1 border border-1 ">
+        <div className="flex w-28 md:w-[60%] h-28">
+          <img className="mask mask-squircle object-scale-down" src={member?.picture} />
         </div>
 
-        <div className=" flex flex-col flex-1 place-content-evenly">
+        <div className=" flex flex-col flex-1 place-content-evenly ">
           <div className="flex flex-col text-center">
             <h3 className="text-black font-semibold">{member?.firstname} </h3>
             <h3 className="text-black font-medium">{member?.lastname}</h3>
           </div>
-
-          <div className=" p-2 self-center">
-            <img className="p-2 sm:max-w-[7rem] max-h-[3rem]" src={member?.companyLogo} />
+          
+          <div className="p-2 self-center ">
+            <img className=" p-2 h-[3rem]" src={member?.companyLogo} />
           </div>
         </div>
       </div>
