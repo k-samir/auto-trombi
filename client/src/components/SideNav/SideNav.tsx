@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { BiLogOut } from "react-icons/bi";
-import { FaSignInAlt, FaUserCircle } from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
 import { TiUserAdd } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import Auth from "../../contexts/Auth";
@@ -45,16 +45,7 @@ const SideNav = (props:Props) => {
             </>
           )) || (
             <>
-              <li>
-                <Link
-                  to="/profile"
-                  className="btn  text-white"
-                  onClick={toggleSideVisibility}
-                >
-                  {" "}
-                  <FaUserCircle /> Profile
-                </Link>
-              </li>
+             
               <li>
                 <button
                   className="btn  text-white"
