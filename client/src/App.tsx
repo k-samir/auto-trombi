@@ -6,7 +6,6 @@ import AuthenticatedRoute from "./components/AuthenticatedRoute/AuthenticatedRou
 import Dashboard from "./components/Dashboard/Dashboard";
 import Index from "./components/Index/Index";
 import Login from "./components/Login/Login";
-import Profile from "./components/Profile/Profile";
 
 import SignUp from "./components/SignUp/SignUp";
 import Wrapper from "./components/Wrapper/Wrapper";
@@ -17,7 +16,7 @@ const App = () => {
 
   return (
     <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-      <div className="flex justify-center">
+      <div className="flex justify-center bg-neutral">
         <Wrapper>
           <div className="flex flex-1 centered">
             <Routes>
@@ -28,9 +27,7 @@ const App = () => {
               <Route path="/dashboard" element={<AuthenticatedRoute />}>
                 <Route path="/dashboard" element={<Dashboard />} />
               </Route>
-              <Route path="/profile" element={<AuthenticatedRoute />}>
-                <Route path="/profile" element={<Profile />} />
-              </Route>
+           
             </Routes>
           </div>
         </Wrapper>

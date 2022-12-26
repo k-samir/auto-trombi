@@ -64,7 +64,7 @@ const Login = () => {
   
 
   return (
-    <div className="self-center text-center rounded-lg  w-fit h-fit flex flex-col p-16 pt-12 gap-5 border border-1">
+    <div className="self-center text-center rounded-lg  w-fit h-fit flex flex-col p-16 pt-12 gap-5 border border-1 bg-neutral-content">
       <h1 className="font-comfortaa font-extrabold text-neutral">Sign In</h1>
       <form
         className="flex flex-col w-fit gap-2 self-center"

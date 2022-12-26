@@ -6,7 +6,7 @@ const Index = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="my-20">
+    <div className="">
     <div className="flex hero-content md:gap-52">
       <div className="max-w-md flex flex-col justify-center self align-middle">
         <h1 className="text-5xl font-bold">Hello there</h1>

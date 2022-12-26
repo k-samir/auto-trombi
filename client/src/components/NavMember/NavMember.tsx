@@ -9,7 +9,7 @@ const NavMember = (props:Props) => {
         const member = useGetMember(memberId);
 
     return (
-        <div className=" flex flex-1 justify-end border border-1">
+        <div className=" flex flex-1 justify-end border border-1 bg-base-100 text-black">
         {member?.firstname} {member?.lastname}
         <div className="avatar online">
           <div className="w-10 rounded-full">
