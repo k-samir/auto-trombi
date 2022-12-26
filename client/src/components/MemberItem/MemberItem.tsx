@@ -13,11 +13,11 @@ type Props = {
 const MemberItem = (props: Props) => {
   const { memberId, groupId, subGroupId, refetch } = props;
 
-  const [addModelIsOpen, setAddModelOpen] = useState(false);
+  const [addModalIsOpen, setAddModalOpen] = useState(false);
   const [removeMemberIsOpen, setRemoveMemberOpen] = useState(false);
 
   function closeAddModal() {
-    setAddModelOpen(false);
+    setAddModalOpen(false);
   }
 
   function closeRemoveModal() {
@@ -25,7 +25,7 @@ const MemberItem = (props: Props) => {
   }
 
   function openAddModal() {
-    setAddModelOpen(true);
+    setAddModalOpen(true);
   }
 
   if (memberId) {
@@ -33,7 +33,7 @@ const MemberItem = (props: Props) => {
     if (member) {
       return (
         <>
-          <div className=" rounded-lg items-center w-32 md:w-40 flex flex-col gap-1 border border-1 ">
+          <div className=" rounded-lg items-center w-32 md:w-40 flex flex-col gap-1 border border-1 bg-base-100">
             <div className="flex flex-1 self-end px-2 pt-2">
               <HiUserRemove
                 onClick={() => setRemoveMemberOpen(true)}
@@ -48,7 +48,7 @@ const MemberItem = (props: Props) => {
               />
             </div>
 
-            <div className=" flex flex-col flex-1 place-content-evenly ">
+            <div className=" flex flex-col flex-1 place-content-evenly">
               <div className="flex flex-col text-center">
                 <h3 className="text-black font-semibold">
                   {member?.firstname}{" "}
@@ -79,14 +79,14 @@ const MemberItem = (props: Props) => {
 
   return (
     <>
-      <div onClick={() => openAddModal()} className="self-center rounded-2xl flex flex-col group hover:cursor-pointer w-18 h-18 items-center p-2 justify-center border border-1 hover:bg-black/10">
+      <div onClick={() => openAddModal()} className="self-center rounded-2xl flex flex-col bg-base-100 grouphover:cursor-pointer w-18 h-18 items-center p-2 justify-center border border-1 hover:bg-black/10">
         <HiUserAdd size={44} color="black"  className="group-hover:fill-blue-500 " />
       </div>
       <AddMemberModal
         refetch={refetch!}
         groupId={groupId!}
         subGroupId={subGroupId!}
-        show={addModelIsOpen}
+        show={addModalIsOpen}
         closeModal={closeAddModal}
       />
     </>
