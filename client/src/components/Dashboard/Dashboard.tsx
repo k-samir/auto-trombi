@@ -27,12 +27,26 @@ const Dashboard = () => {
         setSelectedGroup(tmp);
       }
     } else {
-      if (selectedGroup && selectedSubGroup) {
+      const inGroups = groups.find((group) => group.id == selectedGroup.id);
+      const inSubGroups = inGroups?.subGroups.find(
+        (SubGroup) => SubGroup.id == selectedSubGroup.id
+      );
+
+      if (inGroups && inSubGroups) {
         const tmp = groups
           .find((group: Group) => group.id == selectedGroup.id)
           ?.subGroups.find((subgroup) => subgroup.id == selectedSubGroup.id);
         if (tmp) {
           setSelectedSubGroup(tmp);
+        }
+      } else {
+        if (groups[0]) {
+          setSelectedGroup(groups[0]);
+          if (groups[0].subGroups[0]) {
+            setSelectedSubGroup(groups[0].subGroups[0]);
+          } else {
+            setSelectedSubGroup({} as SubGroup);
+          }
         }
       }
     }

@@ -114,7 +114,6 @@ app.get("/getUser", authMiddle, (req, res) => {
 
 app.get("/getMember", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
-  console.log(req.query.id);
   const member = data.members.find((member) => member.id == req.query.id);
 
   if (member) {
@@ -127,8 +126,6 @@ app.get("/getMember", authMiddle, (req, res) => {
 
 app.get("/getRemainingMembers", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
-  console.log(req.query.groupId);
-  console.log(req.query.subGroupId);
 
   const group = data.groups.find(
     (group) => group.id == req.query.groupId
@@ -417,6 +414,80 @@ app.delete("/removeMemberFromSubGroup", (req, res) => {
     return res.status(200).json({ message: "Member removed successfully" });
   }
   return res.status(400).json({ message: "Page not found" });
+});
+
+app.delete("/removeGroup", (req, res) => { 
+   if (!req.body.groupId) {
+    return res.status(400).json({
+      message: "Error. Please make sure all fields are filled in correctly",
+    });
+  }
+  let data = JSON.parse(fs.readFileSync("data.json"));
+
+  const groupId = req.body.groupId;
+  const index = data.groups.findIndex((group) => group.id == groupId);
+
+  if (index !== -1) {
+    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        obj = JSON.parse(data);
+        obj.groups.splice(index, 1);
+
+        json = JSON.stringify(obj);
+        fs.writeFile("data.json", json, "utf8", (err) => {
+          if (err) console.log(err);
+          else {
+            console.log(groupId + " removed successfully");
+          }
+        });
+      }
+    });
+    return res.status(200).json({ message: "Group removed successfully" });
+  }
+  return res.status(400).json({ message: "Group does not exist" });
+});
+
+app.delete("/removeSubGroup", (req, res) => {
+  let data = JSON.parse(fs.readFileSync("data.json"));
+
+  if (!req.body.groupId || !req.body.subGroupId) {
+    return res.status(400).json({
+      message: "Error. Please make sure all fields are filled in correctly",
+    });
+  }
+
+  const groupId = req.body.groupId;
+  const subGroupId = req.body.subGroupId;
+
+  const group = data.groups.find((group) => group.id == groupId).subGroups;
+
+  const index = group.findIndex((subgroup) => subgroup.id == subGroupId);
+
+  if (index !== -1) {
+    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        obj = JSON.parse(data);
+
+        obj.groups
+          .find((group) => group.id == groupId)
+          .subGroups.splice(index, 1);
+
+        json = JSON.stringify(obj);
+        fs.writeFile("data.json", json, "utf8", (err) => {
+          if (err) console.log(err);
+          else {
+            console.log(subGroupId + " removed successfully");
+          }
+        });
+      }
+    });
+    return res.status(200).json({ message: "SubGroup removed successfully" });
+  }
+  return res.status(400).json({ message: "Error" });
 });
 
 app.get("*", (req, res) => {

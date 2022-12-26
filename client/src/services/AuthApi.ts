@@ -131,8 +131,6 @@ export const addNewMemberToSubGroup = async (firstname:string,lastname:string,co
 }
 
 export const removeMemberFromSubGroup = async (memberId:string,groupId:string,subGroupId:string) => {
-  console.log('removing member from sub group' + memberId + ' ' + groupId + ' ' + subGroupId);
-  
   return axios
     .delete("http://localhost:3000/removeMemberFromSubGroup", {data : {memberId,groupId,subGroupId}})
     .then((response) => response.data.token)
@@ -170,6 +168,34 @@ export const addGroup = async (groupName:string) => {
       }
     });
 }
+
+export const removeGroup = async (groupId:string) => {
+  return axios
+    .delete("http://localhost:3000/removeGroup", {data : {groupId}})
+    .then((response) => response.data.token)
+    .catch(function (error) {
+      if (!error.response) {
+        return "Error: Network Error";
+      } else {
+        return error.response.data.message;
+      }
+    });
+}
+
+
+export const removeSubGroup = async (groupId:string,subGroupId:string) => {
+  return axios
+    .delete("http://localhost:3000/removeSubGroup", {data : {groupId,subGroupId}})
+    .then((response) => response.data.token)
+    .catch(function (error) {
+      if (!error.response) {
+        return "Error: Network Error";
+      } else {
+        return error.response.data.message;
+      }
+    });
+}
+
 
 
 
