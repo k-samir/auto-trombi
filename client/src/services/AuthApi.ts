@@ -104,6 +104,7 @@ export const getRemainingMembers = async (groupId:string,subGroupId:string) => {
 };
 
 export const addExistingMemberToSubGroup = async (memberId:string,groupId:string,subGroupId:string) => {
+  
   return axios
     .post("http://localhost:3000/addExistingMemberToSubGroup", {memberId,groupId,subGroupId})
     .then((response) => response.data.token)
@@ -115,8 +116,6 @@ export const addExistingMemberToSubGroup = async (memberId:string,groupId:string
       }
     });
 };
-
-
 
 export const addNewMemberToSubGroup = async (firstname:string,lastname:string,company:string,picture:string,companyLogo:string,groupId:string,subGroupId:string) => {
   return axios
@@ -146,7 +145,31 @@ export const removeMemberFromSubGroup = async (memberId:string,groupId:string,su
     });
 }
 
+export const addSubGroup = async (subgroupName:string,groupId:string) => {
+  return axios
+    .post("http://localhost:3000/addSubGroup", {subgroupName,groupId})
+    .then((response) => response.data.token)
+    .catch(function (error) {
+      if (!error.response) {
+        return "Error: Network Error";
+      } else {
+        return error.response.data.message;
+      }
+    });
+}
 
+export const addGroup = async (groupName:string) => {
+  return axios
+    .post("http://localhost:3000/addGroup", {groupName})
+    .then((response) => response.data.token)
+    .catch(function (error) {
+      if (!error.response) {
+        return "Error: Network Error";
+      } else {
+        return error.response.data.message;
+      }
+    });
+}
 
 
 

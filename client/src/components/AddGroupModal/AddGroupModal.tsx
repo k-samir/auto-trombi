@@ -1,21 +1,28 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { GiCheckboxTree } from "react-icons/gi";
+import { addGroup } from "../../services/AuthApi";
 
 type Props = {
- // groupId: string;
- // subGroupId: string;
   show: boolean;
   closeModal: () => void;
- // refetch: () => void;
+  refetch: () => void;
 };
 const AddGroupModal = (props: Props) => {
-  const { show, closeModal } = props;
-
-  const handleAddNew = async (event: any) => {
-    event.preventDefault();
-  };
-
+  const { show, closeModal,refetch } = props;
+  
+    const handleAddNew = async (event: any) => {
+      event.preventDefault();
+      console.log("adding " + event.target.groupName.value);
+  
+      try {
+        const response = await addGroup(event.target.groupName.value);
+        refetch();
+        closeModal();
+      } catch ({ response }) {
+      }
+    };
+  
   return (
     <Transition appear show={show} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>

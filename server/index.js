@@ -275,6 +275,98 @@ app.post("/addExistingMemberToSubGroup", (req, res) => {
   return res.status(409).json({ message: "Member already in subgroup." });
 });
 
+app.post("/addSubGroup", (req, res) => {
+  let data = JSON.parse(fs.readFileSync("data.json"));
+
+  if (!req.body.subgroupName || !req.body.groupId) {
+    return res.status(400).json({
+      message: "Error. Please make sure all fields are filled in correctly",
+    });
+  }
+
+  const groupId = req.body.groupId;
+  const subgroupName = req.body.subgroupName;
+
+  const group = data.groups.find((group) => group.id == groupId).subGroups;
+  const groupName = data.groups.find((group) => group.id == groupId).name;
+  const duplicate = group.find((subgroup) => subgroup.name == subgroupName);
+
+  if (!duplicate) {
+    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        obj = JSON.parse(data);
+        const subGroup = {
+          id: uuidv4(),
+          parent: groupName,
+          name: subgroupName,
+          membersId: [],
+        };
+
+        obj.groups
+          .find((group) => group.id == groupId)
+          .subGroups.push(subGroup);
+
+        json = JSON.stringify(obj);
+        fs.writeFile("data.json", json, "utf8", (err) => {
+          if (err) console.log(err);
+          else {
+            console.log(subgroupName + " added successfully");
+          }
+        });
+      }
+    });
+
+    return res.status(200).json({ message: "SubGroup added successfully" });
+  }
+  return res.status(409).json({ message: "SubGroup already in group." });
+});
+
+app.post("/addGroup", (req, res) => {
+  let data = JSON.parse(fs.readFileSync("data.json"));
+
+  if (!req.body.groupName) {
+    return res.status(400).json({
+      message: "Error. Please make sure all fields are filled in correctly",
+    });
+  }
+
+  const groupName = req.body.groupName;
+
+  const group = data.groups;
+  const duplicate = group.find((group) => group.name == groupName);
+
+  if (!duplicate) {
+    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+      if (err) {
+        console.log(err);
+      } else {
+        obj = JSON.parse(data);
+        const group = {
+          id: uuidv4(),
+          owner: "1",
+          name: groupName,
+          subGroups: [],
+        };
+
+        obj.groups.push(group);
+
+        json = JSON.stringify(obj);
+        fs.writeFile("data.json", json, "utf8", (err) => {
+          if (err) console.log(err);
+          else {
+            console.log(groupName + " added successfully");
+          }
+        });
+      }
+    });
+
+    return res.status(200).json({ message: "Group added successfully" });
+  }
+  return res.status(409).json({ message: "This Group already exist." });
+});
+
 app.delete("/removeMemberFromSubGroup", (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 
@@ -302,11 +394,11 @@ app.delete("/removeMemberFromSubGroup", (req, res) => {
       } else {
         obj = JSON.parse(data);
 
-        console.log(obj.groups
-          .find((group) => group.id == groupId)
-          .subGroups.find((subGroup) => subGroup.id == subGroupId)
-          .membersId);
-
+        console.log(
+          obj.groups
+            .find((group) => group.id == groupId)
+            .subGroups.find((subGroup) => subGroup.id == subGroupId).membersId
+        );
 
         obj.groups
           .find((group) => group.id == groupId)

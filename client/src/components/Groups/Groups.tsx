@@ -3,7 +3,6 @@ import { useState } from "react";
 import { BiBookAdd } from "react-icons/bi";
 import { FiChevronUp } from "react-icons/fi";
 import { GiCheckboxTree } from "react-icons/gi";
-import uuid from "react-uuid";
 import { Group } from "../../models/Group";
 import { SubGroup } from "../../models/SubGroup";
 import AddGroupModal from "../AddGroupModal/AddGroupModal";
@@ -13,9 +12,10 @@ type Props = {
   groups: Group[];
   selectedSubGroup: SubGroup;
   handleSelectedChange: (group: Group, subgroup: SubGroup) => void;
+  refetch: () => void;
 };
 const Groups = (props: Props) => {
-  const { groups, selectedSubGroup, handleSelectedChange } = props;
+  const { groups, selectedSubGroup, handleSelectedChange,refetch } = props;
 
   const [addSubGroupModalIsOpen, setAddSubGroupModalOpen] = useState(false);
   const [addGroupModalIsOpen, setAddGroupModalOpen] = useState(false);
@@ -44,7 +44,7 @@ const Groups = (props: Props) => {
           <ul className="menu menu-compact  lg:menu-normal flex flex-1  bg-base-100">
             {groups.map((group: Group, index: number) => {
               return (
-                <Disclosure defaultOpen={index == 0}>
+                <Disclosure defaultOpen={index == 0} key={index}>
                   {({ open }) => (
                     <>
                       <div key={index}>
@@ -73,15 +73,15 @@ const Groups = (props: Props) => {
                             </Disclosure.Panel>
                           );
                         })}
-                        <Disclosure.Panel key={index}>
-                          <li key={uuid()} className="text-sm">
+                        <Disclosure.Panel>
+                          <li className="text-sm">
                             <a className="flex flex-1 text-sm border border-1" onClick={openAddSubGroupModal}>
                               <GiCheckboxTree size={22} />
                               Add Subgroup
                             </a>
                           </li>
 
-                          <AddSubGroupModal show={addSubGroupModalIsOpen} closeModal={closeSubGroupModal} />
+                          <AddSubGroupModal show={addSubGroupModalIsOpen} closeModal={closeSubGroupModal} groupId={group.id} refetch={refetch}/>
 
                         </Disclosure.Panel>
                       </div>
@@ -99,7 +99,7 @@ const Groups = (props: Props) => {
               <BiBookAdd size={22} />
               Add Group
             </a>
-            <AddGroupModal show={addGroupModalIsOpen} closeModal={closeGroupModal} />
+            <AddGroupModal show={addGroupModalIsOpen} closeModal={closeGroupModal} refetch={refetch}  />
           </div>
         </div>
       </div>

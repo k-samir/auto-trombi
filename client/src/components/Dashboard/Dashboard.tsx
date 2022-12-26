@@ -49,6 +49,7 @@ const Dashboard = () => {
         groups={groups}
         selectedSubGroup={selectedSubGroup as SubGroup}
         handleSelectedChange={handleSelect}
+        refetch={() => refetch({})}
       />
       <Trombi
         refetch={() => refetch({})}

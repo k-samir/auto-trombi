@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { Member } from "../../models/Member";
 import { removeMemberFromSubGroup } from "../../services/AuthApi";
@@ -15,11 +15,7 @@ type Props = {
 const RemoveMemberModal = (props: Props) => {
   const { refetch,show, closeModal, groupId,subGroupId,memberToRemove } = props;
 
-  useEffect(() => {
-    console.log(groupId);
-    console.log(subGroupId);
-  }, []);
-
+ 
   const handleRemoveMember = async () => {
  
     try {

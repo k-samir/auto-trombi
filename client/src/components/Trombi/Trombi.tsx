@@ -12,6 +12,8 @@ type Props = {
 const Trombi = (props: Props) => {
   const { selectedGroup, selectedSubGroup, refetch } = props;
 
+
+
   return (
     <div className="sm:w-[70%] rounded-md border border-1">
       <div className="w-full pl-5 text-sm breadcrumbs rounded-t flex flex-1 bg-base-100">
@@ -22,7 +24,6 @@ const Trombi = (props: Props) => {
       </div>
 
       <div className="flex flex-wrap gap-7 justify-center p-5">
-      
 
         {selectedSubGroup.membersId?.map((id: string) => (
           <MemberItem
@@ -33,7 +34,6 @@ const Trombi = (props: Props) => {
             memberId={id}
           />
         ))}
-
 
         {selectedSubGroup.membersId?.length === 0 && (
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} className="border px-9 py-12 bg-base-100 rounded-md"/>

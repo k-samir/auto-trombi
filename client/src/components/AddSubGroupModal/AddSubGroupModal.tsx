@@ -1,20 +1,36 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { GiCheckboxTree } from "react-icons/gi";
+import { addSubGroup } from "../../services/AuthApi";
 
 type Props = {
- // groupId: string;
+  groupId: string;
  // subGroupId: string;
   show: boolean;
   closeModal: () => void;
- // refetch: () => void;
+  refetch: () => void;
 };
 const AddSubGroupModal = (props: Props) => {
-  const { show, closeModal } = props;
+  const { show, closeModal,groupId,refetch } = props;
 
   const handleAddNew = async (event: any) => {
     event.preventDefault();
+    console.log("adding " + event.target.subgroupName.value + " to " + groupId);
+
+    try {
+      const response = await addSubGroup(
+        event.target.subgroupName.value,
+        groupId
+      );
+      refetch();
+      closeModal();
+    } catch ({ response }) {
+      //console.log(response);
+    }
   };
+
+
+
 
   return (
     <Transition appear show={show} as={Fragment}>
