@@ -126,16 +126,14 @@ app.get("/getMember", authMiddle, (req, res) => {
 
 app.get("/getMembers", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
-    const membersId = req.query.membersId.split(",");
-;
-    let members = [];
-    membersId.forEach((memberId) => {
-      const member = data.members.find((member) => member.id == memberId);
-      if(member) members.push(member);
-    });
-  
-    return res.send({ members: members });
-  
+  const membersId = req.query.membersId.split(",");
+  let members = [];
+  membersId.forEach((memberId) => {
+    const member = data.members.find((member) => member.id == memberId);
+    if (member) members.push(member);
+  });
+
+  return res.send({ members: members });
 });
 
 app.get("/getRemainingMembers", authMiddle, (req, res) => {
@@ -173,7 +171,7 @@ app.get("/getGroups", authMiddle, (req, res) => {
   });
 });
 
-app.post("/addNewMemberToSubGroup", (req, res) => {
+app.post("/addNewMemberToSubGroup", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 
   if (
@@ -239,7 +237,7 @@ app.post("/addNewMemberToSubGroup", (req, res) => {
   return res.status(409).json({ message: "Member already exists." });
 });
 
-app.post("/addExistingMemberToSubGroup", (req, res) => {
+app.post("/addExistingMemberToSubGroup", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 
   if (!req.body.groupId || !req.body.memberId || !req.body.subGroupId) {
@@ -285,7 +283,7 @@ app.post("/addExistingMemberToSubGroup", (req, res) => {
   return res.status(409).json({ message: "Member already in subgroup." });
 });
 
-app.post("/addSubGroup", (req, res) => {
+app.post("/addSubGroup", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 
   if (!req.body.subgroupName || !req.body.groupId) {
@@ -333,7 +331,7 @@ app.post("/addSubGroup", (req, res) => {
   return res.status(409).json({ message: "SubGroup already in group." });
 });
 
-app.post("/addGroup", (req, res) => {
+app.post("/addGroup", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 
   if (!req.body.groupName) {
@@ -377,7 +375,7 @@ app.post("/addGroup", (req, res) => {
   return res.status(409).json({ message: "This Group already exist." });
 });
 
-app.delete("/removeMemberFromSubGroup", (req, res) => {
+app.delete("/removeMemberFromSubGroup", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 
   if (!req.body.memberId || !req.body.groupId || !req.body.subGroupId) {
@@ -429,8 +427,8 @@ app.delete("/removeMemberFromSubGroup", (req, res) => {
   return res.status(400).json({ message: "Page not found" });
 });
 
-app.delete("/removeGroup", (req, res) => { 
-   if (!req.body.groupId) {
+app.delete("/removeGroup", authMiddle, (req, res) => {
+  if (!req.body.groupId) {
     return res.status(400).json({
       message: "Error. Please make sure all fields are filled in correctly",
     });
@@ -462,7 +460,7 @@ app.delete("/removeGroup", (req, res) => {
   return res.status(400).json({ message: "Group does not exist" });
 });
 
-app.delete("/removeSubGroup", (req, res) => {
+app.delete("/removeSubGroup", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 
   if (!req.body.groupId || !req.body.subGroupId) {

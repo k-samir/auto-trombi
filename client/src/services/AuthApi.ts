@@ -6,7 +6,6 @@ import { addItem, getItem, removeItem } from "./LocaleStorage";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-
 export const hasAuthenticated = () => {
   const token = getItem("authToken");
   const validityToken = token ? tokenIsValid(token) : false;
@@ -34,7 +33,7 @@ export const login = async (credentials: Credentials) => {
     });
 };
 
-export const signup = async (user: User) => { 
+export const signup = async (user: User) => {
   return axios
     .post(`${API_URL}/signup`, user)
     .then((response) => response.data.token)
@@ -67,20 +66,20 @@ export const getUser = async (id: string) => {
   const token = getItem("authToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
-    params: { id: id}
+    params: { id: id },
   };
 
-  const res = await axios.get(`${API_URL}/getUser`,config);
+  const res = await axios.get(`${API_URL}/getUser`, config);
   return res.data.user;
 };
 
 export const getGroups = async () => {
   const token = getItem("authToken");
   const config = {
-    headers: { Authorization: `Bearer ${token}` }
+    headers: { Authorization: `Bearer ${token}` },
   };
-  
-  const res = await axios.get(`${API_URL}/getGroups`,config);
+
+  const res = await axios.get(`${API_URL}/getGroups`, config);
   return res.data.groups;
 };
 
@@ -88,41 +87,54 @@ export const getMember = async (id: string) => {
   const token = getItem("authToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
-    params: { id: id}
+    params: { id: id },
   };
 
-  const res = await axios.get(`${API_URL}/getMember`,config);
+  const res = await axios.get(`${API_URL}/getMember`, config);
   return res.data.member;
 };
 
-export const getMembers = async (membersId:string[]) => {
-  
-
+export const getMembers = async (membersId: string[]) => {
   const token = getItem("authToken");
-  const config:AxiosRequestConfig = {
+  const config: AxiosRequestConfig = {
     headers: { Authorization: `Bearer ${token}` },
-    params: { membersId: membersId.join(',')}
-    };
- 
-  const res = await axios.get(`${API_URL}/getMembers`,config);
-  return res.data.members;
-}
+    params: { membersId: membersId.join(",") },
+  };
 
-export const getRemainingMembers = async (groupId:string,subGroupId:string) => {
+  const res = await axios.get(`${API_URL}/getMembers`, config);
+  return res.data.members;
+};
+
+export const getRemainingMembers = async (
+  groupId: string,
+  subGroupId: string
+) => {
   const token = getItem("authToken");
   const config = {
     headers: { Authorization: `Bearer ${token}` },
-    params: { groupId: groupId, subGroupId:subGroupId}
+    params: { groupId: groupId, subGroupId: subGroupId },
   };
-  
-  const res = await axios.get(`${API_URL}/getRemainingMembers`,config);
+
+  const res = await axios.get(`${API_URL}/getRemainingMembers`, config);
   return res.data.remainingMembers;
 };
 
-export const addExistingMemberToSubGroup = async (memberId:string,groupId:string,subGroupId:string) => {
-  
+export const addExistingMemberToSubGroup = async (
+  memberId: string,
+  groupId: string,
+  subGroupId: string
+) => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
   return axios
-    .post(`${API_URL}/addExistingMemberToSubGroup`, {memberId,groupId,subGroupId})
+    .post(
+      `${API_URL}/addExistingMemberToSubGroup`,
+      { memberId, groupId, subGroupId },
+      config
+    )
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -133,9 +145,33 @@ export const addExistingMemberToSubGroup = async (memberId:string,groupId:string
     });
 };
 
-export const addNewMemberToSubGroup = async (firstname:string,lastname:string,company:string,picture:string,companyLogo:string,groupId:string,subGroupId:string) => {
+export const addNewMemberToSubGroup = async (
+  firstname: string,
+  lastname: string,
+  company: string,
+  picture: string,
+  companyLogo: string,
+  groupId: string,
+  subGroupId: string
+) => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   return axios
-    .post(`${API_URL}/addNewMemberToSubGroup`, {firstname,lastname,company,picture,companyLogo,groupId,subGroupId})
+    .post(
+      `${API_URL}/addNewMemberToSubGroup`,
+      {
+        firstname,
+        lastname,
+        company,
+        picture,
+        companyLogo,
+        groupId,
+        subGroupId,
+      },
+      config
+    )
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -144,11 +180,20 @@ export const addNewMemberToSubGroup = async (firstname:string,lastname:string,co
         return error.response.data.message;
       }
     });
-}
+};
 
-export const removeMemberFromSubGroup = async (memberId:string,groupId:string,subGroupId:string) => {
+export const removeMemberFromSubGroup = async (
+  memberId: string,
+  groupId: string,
+  subGroupId: string
+) => {
+  const token = getItem("authToken");
+
   return axios
-    .delete(`${API_URL}/removeMemberFromSubGroup`, {data : {memberId,groupId,subGroupId}})
+    .delete(`${API_URL}/removeMemberFromSubGroup`, {
+      headers: { Authorization: `Bearer ${token}` },
+      data: { memberId, groupId, subGroupId },
+    })
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -157,11 +202,15 @@ export const removeMemberFromSubGroup = async (memberId:string,groupId:string,su
         return error.response.data.message;
       }
     });
-}
+};
 
-export const addSubGroup = async (subgroupName:string,groupId:string) => {
+export const addSubGroup = async (subgroupName: string, groupId: string) => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   return axios
-    .post(`${API_URL}/addSubGroup`, {subgroupName,groupId})
+    .post(`${API_URL}/addSubGroup`, { subgroupName, groupId }, config)
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -170,11 +219,15 @@ export const addSubGroup = async (subgroupName:string,groupId:string) => {
         return error.response.data.message;
       }
     });
-}
+};
 
-export const addGroup = async (groupName:string) => {
+export const addGroup = async (groupName: string) => {
+  const token = getItem("authToken");
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   return axios
-    .post(`${API_URL}/addGroup`, {groupName})
+    .post(`${API_URL}/addGroup`, { groupName }, config)
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -183,11 +236,16 @@ export const addGroup = async (groupName:string) => {
         return error.response.data.message;
       }
     });
-}
+};
 
-export const removeGroup = async (groupId:string) => {
+export const removeGroup = async (groupId: string) => {
+  const token = getItem("authToken");
+
   return axios
-    .delete(`${API_URL}/removeGroup`, {data : {groupId}})
+    .delete(`${API_URL}/removeGroup`, {
+      headers: { Authorization: `Bearer ${token}` },
+      data: { groupId },
+    })
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -196,12 +254,16 @@ export const removeGroup = async (groupId:string) => {
         return error.response.data.message;
       }
     });
-}
+};
 
+export const removeSubGroup = async (groupId: string, subGroupId: string) => {
+  const token = getItem("authToken");
 
-export const removeSubGroup = async (groupId:string,subGroupId:string) => {
   return axios
-    .delete(`${API_URL}/removeSubGroup`, {data : {groupId,subGroupId}})
+    .delete(`${API_URL}/removeSubGroup`, {
+      headers: { Authorization: `Bearer ${token}` },
+      data: { groupId, subGroupId },
+    })
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -210,9 +272,4 @@ export const removeSubGroup = async (groupId:string,subGroupId:string) => {
         return error.response.data.message;
       }
     });
-}
-
-
-
-
-
+};
