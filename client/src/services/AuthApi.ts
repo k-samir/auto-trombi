@@ -4,6 +4,9 @@ import { Credentials } from "../models/Credentials";
 import { User } from "../models/User";
 import { addItem, getItem, removeItem } from "./LocaleStorage";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 export const hasAuthenticated = () => {
   const token = getItem("authToken");
   const validityToken = token ? tokenIsValid(token) : false;
@@ -16,7 +19,7 @@ export const hasAuthenticated = () => {
 
 export const login = async (credentials: Credentials) => {
   return axios
-    .post("http://localhost:3000/login", credentials)
+    .post(`${API_URL}/login`, credentials)
     .then((response) => response.data.token)
     .then((token) => {
       addItem("authToken", token);
@@ -31,9 +34,9 @@ export const login = async (credentials: Credentials) => {
     });
 };
 
-export const signup = async (user: User) => {
+export const signup = async (user: User) => { 
   return axios
-    .post("http://localhost:3000/signup", user)
+    .post(`${API_URL}/signup`, user)
     .then((response) => response.data.token)
     .then((token) => {
       addItem("authToken", token);
@@ -67,7 +70,7 @@ export const getUser = async (id: string) => {
     params: { id: id}
   };
 
-  const res = await axios.get("http://localhost:3000/getUser",config);
+  const res = await axios.get(`${API_URL}/getUser`,config);
   return res.data.user;
 };
 
@@ -77,7 +80,7 @@ export const getGroups = async () => {
     headers: { Authorization: `Bearer ${token}` }
   };
   
-  const res = await axios.get("http://localhost:3000/getGroups",config);
+  const res = await axios.get(`${API_URL}/getGroups`,config);
   return res.data.groups;
 };
 
@@ -88,7 +91,7 @@ export const getMember = async (id: string) => {
     params: { id: id}
   };
 
-  const res = await axios.get("http://localhost:3000/getMember",config);
+  const res = await axios.get(`${API_URL}/getMember`,config);
   return res.data.member;
 };
 
@@ -101,7 +104,7 @@ export const getMembers = async (membersId:string[]) => {
     params: { membersId: membersId.join(',')}
     };
  
-  const res = await axios.get("http://localhost:3000/getMembers",config);
+  const res = await axios.get(`${API_URL}/getMembers`,config);
   return res.data.members;
 }
 
@@ -112,14 +115,14 @@ export const getRemainingMembers = async (groupId:string,subGroupId:string) => {
     params: { groupId: groupId, subGroupId:subGroupId}
   };
   
-  const res = await axios.get("http://localhost:3000/getRemainingMembers",config);
+  const res = await axios.get(`${API_URL}/getRemainingMembers`,config);
   return res.data.remainingMembers;
 };
 
 export const addExistingMemberToSubGroup = async (memberId:string,groupId:string,subGroupId:string) => {
   
   return axios
-    .post("http://localhost:3000/addExistingMemberToSubGroup", {memberId,groupId,subGroupId})
+    .post(`${API_URL}/addExistingMemberToSubGroup`, {memberId,groupId,subGroupId})
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -132,7 +135,7 @@ export const addExistingMemberToSubGroup = async (memberId:string,groupId:string
 
 export const addNewMemberToSubGroup = async (firstname:string,lastname:string,company:string,picture:string,companyLogo:string,groupId:string,subGroupId:string) => {
   return axios
-    .post("http://localhost:3000/addNewMemberToSubGroup", {firstname,lastname,company,picture,companyLogo,groupId,subGroupId})
+    .post(`${API_URL}/addNewMemberToSubGroup`, {firstname,lastname,company,picture,companyLogo,groupId,subGroupId})
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -145,7 +148,7 @@ export const addNewMemberToSubGroup = async (firstname:string,lastname:string,co
 
 export const removeMemberFromSubGroup = async (memberId:string,groupId:string,subGroupId:string) => {
   return axios
-    .delete("http://localhost:3000/removeMemberFromSubGroup", {data : {memberId,groupId,subGroupId}})
+    .delete(`${API_URL}/removeMemberFromSubGroup`, {data : {memberId,groupId,subGroupId}})
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -158,7 +161,7 @@ export const removeMemberFromSubGroup = async (memberId:string,groupId:string,su
 
 export const addSubGroup = async (subgroupName:string,groupId:string) => {
   return axios
-    .post("http://localhost:3000/addSubGroup", {subgroupName,groupId})
+    .post(`${API_URL}/addSubGroup`, {subgroupName,groupId})
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -171,7 +174,7 @@ export const addSubGroup = async (subgroupName:string,groupId:string) => {
 
 export const addGroup = async (groupName:string) => {
   return axios
-    .post("http://localhost:3000/addGroup", {groupName})
+    .post(`${API_URL}/addGroup`, {groupName})
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -184,7 +187,7 @@ export const addGroup = async (groupName:string) => {
 
 export const removeGroup = async (groupId:string) => {
   return axios
-    .delete("http://localhost:3000/removeGroup", {data : {groupId}})
+    .delete(`${API_URL}/removeGroup`, {data : {groupId}})
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
@@ -198,7 +201,7 @@ export const removeGroup = async (groupId:string) => {
 
 export const removeSubGroup = async (groupId:string,subGroupId:string) => {
   return axios
-    .delete("http://localhost:3000/removeSubGroup", {data : {groupId,subGroupId}})
+    .delete(`${API_URL}/removeSubGroup`, {data : {groupId,subGroupId}})
     .then((response) => response.data.token)
     .catch(function (error) {
       if (!error.response) {
