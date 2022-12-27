@@ -6,7 +6,7 @@ import { getUser } from "../services/AuthApi";
 import { getItem } from "../services/LocaleStorage";
 
 const useGetLoggedUser = () => {
-  const [user, setUser] = useState<User>({});
+  const [user, setUser] = useState<User>({} as User);
   const { isAuthenticated } = useContext(Auth);
 
   useEffect(() => {

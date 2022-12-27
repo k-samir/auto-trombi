@@ -19,6 +19,10 @@ const NavBar = (props: Props) => {
 
   const user: User = useGetLoggedUser();
 
+  const openInNewTab = (url:string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="sm:sticky top-0 z-50 navbar bg-primary rounded-b-lg md:w-[82%] lg:w-[70%] self-center ">
       <div className="navbar-start">
@@ -42,7 +46,7 @@ const NavBar = (props: Props) => {
 
         <Link
           to="/"
-          className="px-4 normal-case text-lg font-comfortaa text-white whitespace-nowrap"
+          className="px-4 normal-case text-lg font-comfortaa text-white whitespace-nowrap my-text-hover"
         >
           auto-trombi
         </Link>
@@ -51,12 +55,12 @@ const NavBar = (props: Props) => {
 
       <div className="navbar-end px-4">
         <div className="self-center hidden md:flex gap-3">
-        <a
-            href="https://github.com/k-samir/auto-trombi"
-            className="rounded-lg p-1 border border-1 group hover:border-black"
+        <span
+            onClick={() => openInNewTab("https://github.com/k-samir/auto-trombi")}
+            className="rounded-lg p-1 border border-1 group my-nav-btn"
           >
-            <FaGithub size={32} color="white" className="group-hover:fill-black"/>
-          </a>
+            <FaGithub size={32} color="white" className="my-nav-btn"/>
+          </span>
 
        
 
@@ -79,11 +83,11 @@ const NavBar = (props: Props) => {
           )) || (
             <>
               {" "}
-              <Link to="/dashboard" className="rounded-lg  p-1 border border-1 group hover:border-black">
+              <Link to="/dashboard" className="rounded-lg  p-1 border border-1 group my-nav-btn">
                 <AiOutlineDashboard
                   size={33}
                   color="white"
-                  className="self-center group-hover:fill-black "
+                  className="self-center my-nav-btn "
                 />
               </Link>
               <Menu as="div" className="relative text-left">
@@ -93,7 +97,7 @@ const NavBar = (props: Props) => {
                   </span>
                   <Menu.Button>
                     <div className="avatar online placeholder">
-                      <div className=" text-neutral-content rounded-full border border-1 hover:text-black hover:border-black p-1 w-[40px]">
+                      <div className=" text-neutral-content rounded-full border border-1 my-nav-btn my-text-hover p-1 w-[40px]">
                         <span className="text-md">
                           {user.firstname ? user.firstname.charAt(0) : ""}
                           {user.lastname ? user.lastname.charAt(0) : ""}

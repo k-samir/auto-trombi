@@ -12,3 +12,16 @@
   }
 }
 
+.my-btn {
+  @apply hover:text-black;
+  @apply hover:bg-slate-400;
+}
+
+.my-nav-btn {
+  @apply hover:border-slate-400;
+  @apply group-hover:fill-slate-400;
+}
+
+.my-text-hover {
+  @apply hover:text-slate-400;
+}

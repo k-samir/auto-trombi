@@ -1,46 +1,34 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import SelectedGroup from "../../contexts/SelectedGroup";
-import SelectedSubGroup from "../../contexts/SelectedSubGroup";
-import { Group } from "../../models/Group";
-import { SubGroup } from "../../models/SubGroup";
-import { removeSubGroup } from "../../services/AuthApi";
+import { Member } from "../../models/Member";
+import { removeMemberFromSubGroup } from "../../services/AuthApi";
 
 type Props = {
   show: boolean;
   closeModal: () => void;
   groupId: string;
-  groupName:string;
-  subGroupId:string;
-  subGroupName:string;
+  subGroupId: string;
+  memberToRemove: Member;
   refetch: () => void;
 };
-const RemoveSubGroupModal = (props: Props) => {
-  const { refetch,show, closeModal, groupId,groupName,subGroupId, subGroupName } = props;
-  const { selectedGroup,setSelectedGroup } = useContext(SelectedGroup);
-  const { selectedSubGroup,setSelectedSubGroup } = useContext(SelectedSubGroup);
+const RemoveMemberModal = (props: Props) => {
+  const { refetch,show, closeModal, groupId,subGroupId,memberToRemove } = props;
 
-
+ 
   const handleRemoveMember = async () => {
  
     try {
-      const response = await removeSubGroup( 
+      const response = await removeMemberFromSubGroup(
+        memberToRemove.id,
         groupId,
         subGroupId
-        );
-        if(groupId == selectedGroup.id && subGroupId == selectedSubGroup.id){
-          setSelectedGroup({} as Group);
-          setSelectedSubGroup({} as SubGroup);
-        }
-       
+      );
       refetch();
       closeModal();
     } catch ({ response }) {
     }
   };
-
-
 
   
   return (
@@ -79,13 +67,12 @@ const RemoveSubGroupModal = (props: Props) => {
                     <div className="flex flex-col gap-2">
                       <h2 className="text-xl font-bold">Are you sure?</h2>
                       <p className="text-sm text-gray-500 px-8">
-                        Do you really want to remove subgroup 
+                        Do you really want to remove
                         <span className="font-bold">
-                            {" "}
-                           {subGroupName} from {groupName}
+                          {" "}
+                          {memberToRemove.firstname} {memberToRemove.lastname}{" "}
                         </span>
-                        {" "}
-                         ? This process cannot be undone
+                        from this subgroup ? This process cannot be undone
                       </p>
                     </div>
                   </div>
@@ -114,4 +101,4 @@ const RemoveSubGroupModal = (props: Props) => {
     </Transition>
   );
 };
-export default RemoveSubGroupModal;
+export default RemoveMemberModal;

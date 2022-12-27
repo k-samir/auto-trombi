@@ -74,7 +74,7 @@ const SignUp = () => {
   }, []);
 
   return (
-    <div className="self-center justify-center text-center rounded-lg  h-fit w-fit flex flex-col p-16 pt-12 gap-5 border border-1">
+    <div className="self-center justify-center text-center rounded-lg  h-fit w-fit flex flex-col p-16 pt-12 gap-5 border border-1 bg-neutral-content">
       <h1 className="font-comfortaa font-extrabold text-neutral">Sign Up</h1>
 
       <form

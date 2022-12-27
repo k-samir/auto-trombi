@@ -9,9 +9,10 @@ import MemberItem from "../MemberItem/MemberItem";
 
 type Props = {
   refetch: () => void;
+  className?: string;
 };
 const Trombi = (props: Props) => {
-  const { refetch } = props;
+  const { refetch,className } = props;
   
   const { selectedGroup, setSelectedGroup } = useContext(SelectedGroup);
   const { selectedSubGroup, setSelectedSubGroup } = useContext(SelectedSubGroup);
@@ -19,7 +20,7 @@ const Trombi = (props: Props) => {
   const members = useGetMembers(selectedSubGroup.membersId);
 
     return (
-      <div className="sm:w-[70%] rounded-md border border-1">
+      <div className={`rounded-md border border-1 ${className}`}>
         <div className="w-full pl-5 text-sm breadcrumbs rounded-t flex flex-1 bg-base-100">
           <ul>
             <li>{selectedSubGroup.parent}</li>

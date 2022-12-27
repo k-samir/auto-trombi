@@ -6,21 +6,20 @@ import { FiChevronUp } from "react-icons/fi";
 import { GiCheckboxTree } from "react-icons/gi";
 import SelectedGroup from "../../contexts/SelectedGroup";
 import SelectedSubGroup from "../../contexts/SelectedSubGroup";
+import AddGroupModal from "../../modals/AddGroupModal/AddGroupModal";
+import AddSubGroupModal from "../../modals/AddSubGroupModal/AddSubGroupModal";
+import RemoveGroupModal from "../../modals/RemoveGroupModal/RemoveGroupModal";
+import RemoveSubGroupModal from "../../modals/RemoveSubGroupModal/RemoveSubGroupModal";
 import { Group } from "../../models/Group";
 import { SubGroup } from "../../models/SubGroup";
-import AddGroupModal from "../AddGroupModal/AddGroupModal";
-import AddSubGroupModal from "../AddSubGroupModal/AddSubGroupModal";
-import RemoveGroupModal from "../RemoveGroupModal/RemoveGroupModal";
-import RemoveSubGroupModal from "../RemoveSubGroupModal/RemoveSubGroupModal";
 
 type Props = {
   groups: Group[];
- // selectedSubGroup: SubGroup;
- // handleSelectedChange: (group: Group, subgroup: SubGroup) => void;
   refetch: () => void;
+  className?: string;
 };
 const Groups = (props: Props) => {
-  const { groups, refetch } = props;
+  const { groups, refetch,className } = props;
 
   const [addSubGroupModalIsOpen, setAddSubGroupModalOpen] = useState(false);
   const [addGroupModalIsOpen, setAddGroupModalOpen] = useState(false);
@@ -73,7 +72,7 @@ const Groups = (props: Props) => {
   };
 
   return (
-    <div className="flex flex-col overflow-auto scrollbar-hide sm:w-[15%] sm:h-[calc(100vh-75px)] items-stretch sm:sticky top-[75px] z-2">
+    <div className={`flex flex-1 flex-col overflow-auto scrollbar-hide items-stretch top-[75px] z-2 ${className}`}>
       <div className="w-full ">
         <div className="mx-auto w-full max-w-md rounded-2xl p-2">
           <ul className="menu menu-compact  lg:menu-normal flex flex-1  bg-base-100">
@@ -83,7 +82,7 @@ const Groups = (props: Props) => {
                   {({ open }) => (
                     <>
                       <div key={index}>
-                        <Disclosure.Button className="flex w-full justify-between bg-primary px-4 py-2 text-left text-sm font-medium text-white hover:bg-blue-200 focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-opacity-75">
+                        <Disclosure.Button className="flex w-full justify-between bg-primary px-4 py-2 text-left text-sm font-medium text-white my-btn focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-opacity-75">
                           <span>{group.name}</span>
                           <div className="flex gap-1 items-center">
                             {group.subGroups.length == 0 && (
@@ -123,8 +122,7 @@ const Groups = (props: Props) => {
                                   <a className="text-sm">{sb.name}</a>
                                   <FaTimes
                                     className="hover:fill-red-500 hover:cursor-pointer"
-                                    onClick={() => openRemoveSubGroupModal(group,sb)}//() => console.log(sb.name,group.name)}//openRemoveSubGroupModal}
-                                  />
+                                    onClick={() => openRemoveSubGroupModal(group,sb)}/>
                                   <RemoveSubGroupModal 
                                     refetch={refetch}
                                     show={removeSubGroupModalIsOpen}
@@ -143,11 +141,11 @@ const Groups = (props: Props) => {
                         <Disclosure.Panel>
                           <li className="text-sm">
                             <a
-                              className="flex flex-1 text-sm border border-1"
+                              className="text-sm border border-1 my-btn my-hover"
                               onClick={() => openAddSubGroupModal(group)}
                             >
                               <GiCheckboxTree size={22} />
-                              Add Subgroup
+                              <p className="text-sm">Add Subgroup</p>
                             </a>
                           </li>
 
@@ -170,7 +168,7 @@ const Groups = (props: Props) => {
 
           <div className="bg-white rounded-md">
             <a
-              className="flex flex-1 border border-1 p-2 gap-2 rounded-md"
+              className="flex flex-1 border border-1 p-2 gap-2 rounded-md my-btn"
               onClick={openAddGroupModal}
             >
               <BiBookAdd size={22} />

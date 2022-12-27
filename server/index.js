@@ -174,7 +174,6 @@ app.get("/getGroups", authMiddle, (req, res) => {
 });
 
 app.post("/addNewMemberToSubGroup", (req, res) => {
-  // firstname:string,lastname:string,company:string,picture:string,companyLogo:string
   let data = JSON.parse(fs.readFileSync("data.json"));
 
   if (

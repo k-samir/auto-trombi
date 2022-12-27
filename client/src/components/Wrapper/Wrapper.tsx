@@ -17,10 +17,8 @@ const Wrapper = (props: Props) => {
   const [sideVisibility, setSideVisibility] = useState<boolean>(false);
 
   const year = new Date().getFullYear();
-  // const loggedUser = UseGetLoggedUser();
 
   const handleLogOut = () => {
-    //setSideVisibility(false);
     logout();
     setIsAuthenticated(false);
   };
@@ -53,8 +51,3 @@ const Wrapper = (props: Props) => {
 };
 
 export default Wrapper;
-/*  <footer className="footer footer-center p-4  text-base-content">
-          <div>
-            <p>© {year} - Samir KAMAR</p>
-          </div>
-        </footer>*/

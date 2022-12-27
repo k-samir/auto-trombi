@@ -10,7 +10,7 @@ import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import Wrapper from "./components/Wrapper/Wrapper";
 import Auth from "./contexts/Auth";
-import { hasAuthenticated } from "./services/AuthApi";
+import { hasAuthenticated } from './services/AuthApi';
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
 

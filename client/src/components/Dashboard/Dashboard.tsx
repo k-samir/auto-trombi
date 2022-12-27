@@ -16,8 +16,6 @@ const Dashboard = () => {
   const [groups, refetch] = useGetGroups(setSelectedGroup, setSelectedSubGroup);
 
   useEffect(() => {
-
-    
     if (!selectedSubGroup.id && !selectedGroup.id && groups[0]) {
       setSelectedGroup(groups[0]);
       setSelectedSubGroup(groups[0].subGroups[0]);
@@ -37,17 +35,19 @@ const Dashboard = () => {
       <SelectedSubGroup.Provider
         value={{ selectedSubGroup, setSelectedSubGroup }}
       >
-        <div className="flex flex-1 px-2 pt-2">
+        <div className="flex flex-1 px-2 pt-2 flex-col sm:flex-row">
           {selectedGroup && selectedSubGroup && (
             <>
               <Groups
                 groups={groups}
                 refetch={refresh}
+                className="sm:min-w-[25%] md:min-w-[20%] lg:min-w-[15%]   overflow-auto sm:sticky top-[75px] z-2 scrollbar-hide sm:h-[calc(100vh-75px)] "
               />
               <Trombi
                 refetch={refresh}
+                className="md:min-w-[50%] lg:min-w-[70%] h-fit"
               />
-              <ListMembers selectedSubGroup={selectedSubGroup as SubGroup} />
+              <ListMembers className=""/>
             </>
           )}
         </div>

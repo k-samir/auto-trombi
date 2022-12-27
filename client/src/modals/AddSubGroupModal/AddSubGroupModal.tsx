@@ -5,7 +5,6 @@ import { addSubGroup } from "../../services/AuthApi";
 
 type Props = {
   groupId: string;
- // subGroupId: string;
   show: boolean;
   closeModal: () => void;
   refetch: () => void;

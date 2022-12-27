@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { HiUserAdd, HiUserRemove } from "react-icons/hi";
+import AddMemberModal from "../../modals/AddMemberModal/AddMemberModal";
+import RemoveMemberModal from "../../modals/RemoveMemberModal/RemoveMemberModal";
 import { Member } from "../../models/Member";
 
-import AddMemberModal from "../AddMemberModal/AddMemberModal";
-import RemoveMemberModal from "../RemoveMemberModal/RemoveMemberModal";
 type Props = {
   member?: Member;
   groupId?: string;
@@ -80,8 +80,8 @@ const MemberItem = (props: Props) => {
 
   return (
     <>
-      <div onClick={() => openAddModal()} className="self-center rounded-2xl flex flex-col bg-base-100 grouphover:cursor-pointer w-18 h-18 items-center p-2 justify-center border border-1 hover:bg-black/10">
-        <HiUserAdd size={44} color="black"  className="group-hover:fill-blue-500 " />
+      <div onClick={() => openAddModal()} className="my-btn self-center rounded-2xl flex flex-col bg-base-100 grouphover:cursor-pointer w-18 h-18 items-center p-2 justify-center border border-1">
+        <HiUserAdd size={44} color="black" />
       </div>
       <AddMemberModal
         refetch={refetch!}
