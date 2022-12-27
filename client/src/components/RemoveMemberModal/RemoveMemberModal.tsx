@@ -27,7 +27,6 @@ const RemoveMemberModal = (props: Props) => {
       refetch();
       closeModal();
     } catch ({ response }) {
-      //console.log(response);
     }
   };
 

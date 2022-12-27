@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import useGetGroups from "../../api/UseGetGroups";
+import SelectedGroup from "../../contexts/SelectedGroup";
+import SelectedSubGroup from "../../contexts/SelectedSubGroup";
 import { Group } from "../../models/Group";
 import { SubGroup } from "../../models/SubGroup";
 import Groups from "../Groups/Groups";
@@ -8,70 +10,49 @@ import Trombi from "../Trombi/Trombi";
 import "./Dashboard.scss";
 
 const Dashboard = () => {
-  const [groups, refetch] = useGetGroups();
-
   const [selectedGroup, setSelectedGroup] = useState<Group>({} as Group);
-  const [selectedSubGroup, setSelectedSubGroup] = useState<SubGroup>(
-    {} as SubGroup
-  );
+  const [selectedSubGroup, setSelectedSubGroup] = useState<SubGroup>({} as SubGroup);
+
+  const [groups, refetch] = useGetGroups(setSelectedGroup, setSelectedSubGroup);
 
   useEffect(() => {
-    if (groups[0] && !Object.entries(selectedGroup).length) {
-      let tmp: any;
-      if (groups[0].subGroups[0]) {
-        tmp = groups[0].subGroups[0];
-        setSelectedGroup(groups[0]);
-        setSelectedSubGroup(tmp);
-      } else {
-        tmp = groups[0];
-        setSelectedGroup(tmp);
-      }
-    } else {
-      const inGroups = groups.find((group) => group.id == selectedGroup.id);
-      const inSubGroups = inGroups?.subGroups.find(
-        (SubGroup) => SubGroup.id == selectedSubGroup.id
-      );
 
-      if (inGroups && inSubGroups) {
-        const tmp = groups
-          .find((group: Group) => group.id == selectedGroup.id)
-          ?.subGroups.find((subgroup) => subgroup.id == selectedSubGroup.id);
-        if (tmp) {
-          setSelectedSubGroup(tmp);
-        }
-      } else {
-        if (groups[0]) {
-          setSelectedGroup(groups[0]);
-          if (groups[0].subGroups[0]) {
-            setSelectedSubGroup(groups[0].subGroups[0]);
-          } else {
-            setSelectedSubGroup({} as SubGroup);
-          }
-        }
-      }
+    
+    if (!selectedSubGroup.id && !selectedGroup.id && groups[0]) {
+      setSelectedGroup(groups[0]);
+      setSelectedSubGroup(groups[0].subGroups[0]);
+    }
+    if(selectedGroup.id && selectedSubGroup.id){
+      setSelectedGroup(groups.find((group:Group) => group.id === selectedGroup.id) as Group);
+      setSelectedSubGroup(groups.find((group:Group) => group.id === selectedGroup.id)?.subGroups.find((subGroup:SubGroup) => subGroup.id === selectedSubGroup.id) as SubGroup);
     }
   }, [groups]);
 
-  const handleSelect = (group: Group, subgroup: SubGroup) => {
-    setSelectedGroup(group);
-    setSelectedSubGroup(subgroup);
-  };
-
+  const refresh = () => {
+    refetch({});
+  }
+  
   return (
-    <div className="flex flex-1 px-2 pt-2">
-      <Groups
-        groups={groups}
-        selectedSubGroup={selectedSubGroup as SubGroup}
-        handleSelectedChange={handleSelect}
-        refetch={() => refetch({})}
-      />
-      <Trombi
-        refetch={() => refetch({})}
-        selectedGroup={selectedGroup as Group}
-        selectedSubGroup={selectedSubGroup as SubGroup}
-      />
-      <ListMembers selectedSubGroup={selectedSubGroup as SubGroup} />
-    </div>
+    <SelectedGroup.Provider value={{ selectedGroup, setSelectedGroup }}>
+      <SelectedSubGroup.Provider
+        value={{ selectedSubGroup, setSelectedSubGroup }}
+      >
+        <div className="flex flex-1 px-2 pt-2">
+          {selectedGroup && selectedSubGroup && (
+            <>
+              <Groups
+                groups={groups}
+                refetch={refresh}
+              />
+              <Trombi
+                refetch={refresh}
+              />
+              <ListMembers selectedSubGroup={selectedSubGroup as SubGroup} />
+            </>
+          )}
+        </div>
+      </SelectedSubGroup.Provider>
+    </SelectedGroup.Provider>
   );
 };
 

@@ -124,6 +124,20 @@ app.get("/getMember", authMiddle, (req, res) => {
   });
 });
 
+app.get("/getMembers", authMiddle, (req, res) => {
+  let data = JSON.parse(fs.readFileSync("data.json"));
+    const membersId = req.query.membersId.split(",");
+;
+    let members = [];
+    membersId.forEach((memberId) => {
+      const member = data.members.find((member) => member.id == memberId);
+      if(member) members.push(member);
+    });
+  
+    return res.send({ members: members });
+  
+});
+
 app.get("/getRemainingMembers", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
 

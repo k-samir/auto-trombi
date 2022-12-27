@@ -15,8 +15,7 @@ const AddSubGroupModal = (props: Props) => {
 
   const handleAddNew = async (event: any) => {
     event.preventDefault();
-    console.log("adding " + event.target.subgroupName.value + " to " + groupId);
-
+    console.log(groupId);
     try {
       const response = await addSubGroup(
         event.target.subgroupName.value,
@@ -25,7 +24,6 @@ const AddSubGroupModal = (props: Props) => {
       refetch();
       closeModal();
     } catch ({ response }) {
-      //console.log(response);
     }
   };
 

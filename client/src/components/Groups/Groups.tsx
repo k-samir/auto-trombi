@@ -1,9 +1,11 @@
 import { Disclosure } from "@headlessui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { BiBookAdd } from "react-icons/bi";
 import { FaTimes } from "react-icons/fa";
 import { FiChevronUp } from "react-icons/fi";
 import { GiCheckboxTree } from "react-icons/gi";
+import SelectedGroup from "../../contexts/SelectedGroup";
+import SelectedSubGroup from "../../contexts/SelectedSubGroup";
 import { Group } from "../../models/Group";
 import { SubGroup } from "../../models/SubGroup";
 import AddGroupModal from "../AddGroupModal/AddGroupModal";
@@ -13,19 +15,29 @@ import RemoveSubGroupModal from "../RemoveSubGroupModal/RemoveSubGroupModal";
 
 type Props = {
   groups: Group[];
-  selectedSubGroup: SubGroup;
-  handleSelectedChange: (group: Group, subgroup: SubGroup) => void;
+ // selectedSubGroup: SubGroup;
+ // handleSelectedChange: (group: Group, subgroup: SubGroup) => void;
   refetch: () => void;
 };
 const Groups = (props: Props) => {
-  const { groups, selectedSubGroup, handleSelectedChange, refetch } = props;
+  const { groups, refetch } = props;
 
   const [addSubGroupModalIsOpen, setAddSubGroupModalOpen] = useState(false);
   const [addGroupModalIsOpen, setAddGroupModalOpen] = useState(false);
   const [removeGroupModalIsOpen, setRemoveGroupModalOpen] = useState(false);
-  const [removeSubGroupModalIsOpen, setRemoveSubGroupModalOpen] =
-    useState(false);
+  const [removeSubGroupModalIsOpen, setRemoveSubGroupModalOpen] = useState(false);
+   
+  const { setSelectedGroup } = useContext(SelectedGroup);
+  const { selectedSubGroup,setSelectedSubGroup } = useContext(SelectedSubGroup);
 
+  const [chosenGroup,setChosenGroup] = useState<Group>({} as Group);
+  const [chosenSubGroup,setChosenSubGroup] = useState<SubGroup>({} as SubGroup);
+
+  const handleSelectedChange = (group: Group, subgroup: SubGroup) => {
+    setSelectedGroup(group);
+    setSelectedSubGroup(subgroup);
+  }
+  
   // ADD GROUP MODAL
   const closeAddGroupModal = () => {
     setAddGroupModalOpen(false);
@@ -38,18 +50,22 @@ const Groups = (props: Props) => {
   const closeAddSubGroupModal = () => {
     setAddSubGroupModalOpen(false);
   };
-  const openAddSubGroupModal = () => {
+  const openAddSubGroupModal = (group:Group) => {
+    setChosenGroup(group);
     setAddSubGroupModalOpen(true);
   };
   // REMOVE GROUP MODAL
-  const openRemoveGroupModal = () => {
+  const openRemoveGroupModal = (group:Group) => {
+    setChosenGroup(group);
     setRemoveGroupModalOpen(true);
   };
   const closeRemoveGroupModal = () => {
     setRemoveGroupModalOpen(false);
   };
   // REMOVE SUBGROUP MODAL
-  const openRemoveSubGroupModal = () => {
+  const openRemoveSubGroupModal = (group:Group,subGroup:SubGroup) => {
+    setChosenGroup(group);
+    setChosenSubGroup(subGroup);
     setRemoveSubGroupModalOpen(true);
   };
   const closeRemoveSubGroupModal = () => {
@@ -73,15 +89,15 @@ const Groups = (props: Props) => {
                             {group.subGroups.length == 0 && (
                               <FaTimes
                                 className="hover:fill-red-500 hover:cursor-pointer"
-                                onClick={openRemoveGroupModal}
+                                onClick={() => openRemoveGroupModal(group)}
                               />
                             )}
                                  <RemoveGroupModal
                                     refetch={refetch}
                                     show={removeGroupModalIsOpen}
-                                    groupId={group.id}
+                                    groupId={chosenGroup.id}
                                     closeModal={closeRemoveGroupModal}
-                                    groupName={group.name}
+                                    groupName={chosenGroup.name}
                                     />
 
                             <FiChevronUp
@@ -107,28 +123,28 @@ const Groups = (props: Props) => {
                                   <a className="text-sm">{sb.name}</a>
                                   <FaTimes
                                     className="hover:fill-red-500 hover:cursor-pointer"
-                                    onClick={openRemoveSubGroupModal}
+                                    onClick={() => openRemoveSubGroupModal(group,sb)}//() => console.log(sb.name,group.name)}//openRemoveSubGroupModal}
                                   />
                                   <RemoveSubGroupModal 
                                     refetch={refetch}
                                     show={removeSubGroupModalIsOpen}
-                                    groupId={group.id}
+                                    groupId={chosenGroup.id}
                                     closeModal={closeRemoveSubGroupModal}
-                                    groupName={group.name}
-                                    subGroupName={sb.name}
-                                    subGroupId={sb.id}
+                                    groupName={chosenGroup.name}
+                                    subGroupName={chosenSubGroup.name}
+                                    subGroupId={chosenSubGroup.id}
                                   />
-                             
                                 </div>
                               </li>
                             </Disclosure.Panel>
                           );
+
                         })}
                         <Disclosure.Panel>
                           <li className="text-sm">
                             <a
                               className="flex flex-1 text-sm border border-1"
-                              onClick={openAddSubGroupModal}
+                              onClick={() => openAddSubGroupModal(group)}
                             >
                               <GiCheckboxTree size={22} />
                               Add Subgroup
@@ -138,7 +154,7 @@ const Groups = (props: Props) => {
                           <AddSubGroupModal
                             show={addSubGroupModalIsOpen}
                             closeModal={closeAddSubGroupModal}
-                            groupId={group.id}
+                            groupId={chosenGroup.id}
                             refetch={refetch}
                           />
                         </Disclosure.Panel>

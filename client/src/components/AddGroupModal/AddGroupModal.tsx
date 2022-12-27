@@ -13,9 +13,9 @@ const AddGroupModal = (props: Props) => {
   
     const handleAddNew = async (event: any) => {
       event.preventDefault();
-      console.log("adding " + event.target.groupName.value);
   
       try {
+        
         const response = await addGroup(event.target.groupName.value);
         refetch();
         closeModal();

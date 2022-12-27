@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import jwtDecode from "jwt-decode";
 import { Credentials } from "../models/Credentials";
 import { User } from "../models/User";
@@ -91,6 +91,19 @@ export const getMember = async (id: string) => {
   const res = await axios.get("http://localhost:3000/getMember",config);
   return res.data.member;
 };
+
+export const getMembers = async (membersId:string[]) => {
+  
+
+  const token = getItem("authToken");
+  const config:AxiosRequestConfig = {
+    headers: { Authorization: `Bearer ${token}` },
+    params: { membersId: membersId.join(',')}
+    };
+ 
+  const res = await axios.get("http://localhost:3000/getMembers",config);
+  return res.data.members;
+}
 
 export const getRemainingMembers = async (groupId:string,subGroupId:string) => {
   const token = getItem("authToken");

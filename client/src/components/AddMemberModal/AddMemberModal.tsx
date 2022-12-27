@@ -41,7 +41,6 @@ const AddMemberModal = (props: Props) => {
       refetch();
       closeModal();
     } catch ({ response }) {
-      //console.log(response);
     }
   }
 
@@ -58,7 +57,6 @@ const AddMemberModal = (props: Props) => {
       refetch();
       closeModal();
     } catch ({ response }) {
-      //console.log(response);
     }
   };
 

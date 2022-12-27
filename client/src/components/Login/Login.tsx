@@ -22,7 +22,6 @@ const Login = () => {
       try {
         navigate("/dashboard");
       } catch ({ response }) {
-        //console.log(response);
       }
     }
   }, []);
@@ -45,7 +44,6 @@ const Login = () => {
         setLoginError(response);
       }
     } catch ({ response }) {
-      //console.log(response);
     }
   };
 

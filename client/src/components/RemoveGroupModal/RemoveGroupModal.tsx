@@ -1,6 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import SelectedGroup from "../../contexts/SelectedGroup";
+import SelectedSubGroup from "../../contexts/SelectedSubGroup";
+import { Group } from "../../models/Group";
+import { SubGroup } from "../../models/SubGroup";
 import { removeGroup } from "../../services/AuthApi";
 
 type Props = {
@@ -12,12 +16,19 @@ type Props = {
 };
 const RemoveGroupModal = (props: Props) => {
   const { refetch,show, closeModal, groupId,groupName } = props;
+  
+  const { selectedGroup,setSelectedGroup } = useContext(SelectedGroup);
+  const { setSelectedSubGroup } = useContext(SelectedSubGroup);
 
- 
-  const handleRemoveMember = async () => {
+  const handleRemoveGroup = async () => {
  
     try {
       const response = await removeGroup(groupId);
+      if(groupId == selectedGroup.id){
+        setSelectedGroup({} as Group);
+        setSelectedSubGroup({} as SubGroup);
+      }
+
       refetch();
       closeModal();
     } catch ({ response }) {
@@ -85,7 +96,7 @@ const RemoveGroupModal = (props: Props) => {
                     <button
                       type="button"
                       className="rounded-xl border border-transparent  px-4 py-2 text-sm font-medium text-white bg-red-500 focus:outline-none hover:shadow-lg hover:bg-red-600"
-                      onClick={handleRemoveMember}
+                      onClick={handleRemoveGroup}
                     >
                       Remove
                     </button>

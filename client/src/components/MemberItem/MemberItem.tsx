@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { HiUserAdd, HiUserRemove } from "react-icons/hi";
-import useGetMember from "../../api/useGetMember";
+import { Member } from "../../models/Member";
 
 import AddMemberModal from "../AddMemberModal/AddMemberModal";
 import RemoveMemberModal from "../RemoveMemberModal/RemoveMemberModal";
 type Props = {
-  memberId?: string;
+  member?: Member;
   groupId?: string;
   subGroupId?: string;
   refetch?: () => void;
 };
 const MemberItem = (props: Props) => {
-  const { memberId, groupId, subGroupId, refetch } = props;
+  const { member, groupId, subGroupId, refetch } = props;
 
   const [addModalIsOpen, setAddModalOpen] = useState(false);
   const [removeMemberIsOpen, setRemoveMemberOpen] = useState(false);
@@ -28,9 +28,10 @@ const MemberItem = (props: Props) => {
     setAddModalOpen(true);
   }
 
-  if (memberId) {
-    const member = useGetMember(memberId);
-    if (member) {
+
+  if (member) {
+    //const member = useGetMember(memberId);
+    //if (member) {
       return (
         <>
           <div className=" rounded-lg items-center w-32 md:w-40 flex flex-col gap-1 border border-1 bg-base-100">
@@ -74,7 +75,7 @@ const MemberItem = (props: Props) => {
           }
         </>
       );
-    }
+    //}
   }
 
   return (
