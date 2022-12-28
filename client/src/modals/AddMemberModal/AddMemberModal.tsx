@@ -6,7 +6,10 @@ import { MdPhotoCamera, MdWork } from "react-icons/md";
 
 import useGetRemainingMembers from "../../api/UseGetRemainingMembers";
 import { Member } from "../../models/Member";
-import { addExistingMemberToSubGroup, addNewMemberToSubGroup } from "../../services/AuthApi";
+import {
+  addExistingMemberToSubGroup,
+  addNewMemberToSubGroup
+} from "../../services/AuthApi";
 
 type Props = {
   groupId: string;
@@ -14,19 +17,18 @@ type Props = {
   show: boolean;
   closeModal: () => void;
   refetch: () => void;
-
 };
 const AddMemberModal = (props: Props) => {
   const { show, closeModal, groupId, subGroupId, refetch } = props;
 
   var remainingMembers: Member[] = useGetRemainingMembers(
-    groupId ?? "1",
-    subGroupId ?? "1"
+    groupId ?? "-1",
+    subGroupId ?? "-1"
   );
 
   const handleAddNew = async (event: any) => {
     event.preventDefault();
- 
+
     try {
       const response = await addNewMemberToSubGroup(
         event.target.firstname.value,
@@ -40,10 +42,8 @@ const AddMemberModal = (props: Props) => {
 
       refetch();
       closeModal();
-    } catch ({ response }) {
-    }
-  }
-
+    } catch ({ response }) {}
+  };
 
   const handleAddExisting = async (event: any) => {
     event.preventDefault();
@@ -56,8 +56,7 @@ const AddMemberModal = (props: Props) => {
 
       refetch();
       closeModal();
-    } catch ({ response }) {
-    }
+    } catch ({ response }) {}
   };
 
   return (
@@ -120,102 +119,100 @@ const AddMemberModal = (props: Props) => {
                   </form>
                 )}
 
-<form onSubmit={handleAddNew}>
+                <form onSubmit={handleAddNew}>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-lg font-medium leading-6 text-gray-900">
+                      Add new member
+                    </h3>
+                    <div className="">
+                      <label className="input-group input-group-md">
+                        <span>
+                          <FaUser />
+                        </span>
 
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Add new member
-                  </h3>
-                  <div className="">
-                    <label className="input-group input-group-md">
-                      <span>
-                        <FaUser />
-                      </span>
+                        <input
+                          required
+                          type="text"
+                          name="firstname"
+                          placeholder="Firstname"
+                          className="input input-bordered input-md"
+                        />
+                      </label>
+                    </div>
+                    <div className="">
+                      <label className="input-group input-group-md">
+                        <span>
+                          <FaUser />
+                        </span>
 
-                      <input
-                        required
-                        type="text"
-                        name="firstname"
-                        placeholder="Firstname"
-                        className="input input-bordered input-md"
-                      />
-                    </label>
+                        <input
+                          required
+                          type="text"
+                          name="lastname"
+                          placeholder="Lastname"
+                          className="input input-bordered input-md"
+                        />
+                      </label>
+                    </div>
+                    <div className="">
+                      <label className="input-group input-group-md">
+                        <span>
+                          <MdWork />
+                        </span>
+
+                        <input
+                          required
+                          type="text"
+                          name="company"
+                          placeholder="Company"
+                          className="input input-bordered input-md"
+                        />
+                      </label>
+                    </div>
+
+                    <div className="">
+                      <label className="input-group input-group-md">
+                        <span>
+                          <MdPhotoCamera />
+                        </span>
+
+                        <input
+                          required
+                          type="text"
+                          name="picture"
+                          placeholder="Member Picture url"
+                          className="input input-bordered input-md"
+                        />
+                      </label>
+                    </div>
+
+                    <div className="">
+                      <label className="input-group input-group-md">
+                        <span>
+                          <IoLogoApple />
+                        </span>
+
+                        <input
+                          required
+                          type="text"
+                          name="companyLogo"
+                          placeholder="Company Logo url"
+                          className="input input-bordered input-md"
+                        />
+                      </label>
+                    </div>
+
+                    <div className="flex flex-col"></div>
+
+                    <button
+                      type="submit"
+                      className=" w-[65%] self-center rounded-md border bg-blue-200 border-transparent  px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}
+                    >
+                      Add new Member
+                    </button>
                   </div>
-                  <div className="">
-                    <label className="input-group input-group-md">
-                      <span>
-                        <FaUser />
-                      </span>
-
-                      <input
-                        required
-                        type="text"
-                        name="lastname"
-                        placeholder="Lastname"
-                        className="input input-bordered input-md"
-                      />
-                    </label>
-                  </div>
-                  <div className="">
-                    <label className="input-group input-group-md">
-                      <span>
-                        <MdWork />
-                      </span>
-
-                      <input
-                        required
-                        type="text"
-                        name="company"
-                        placeholder="Company"
-                        className="input input-bordered input-md"
-                      />
-                    </label>
-                  </div>
-
-                  <div className="">
-                    <label className="input-group input-group-md">
-                      <span>
-                        <MdPhotoCamera />
-                      </span>
-
-                      <input
-                        required
-                        type="text"
-                        name="picture"
-                        placeholder="Member Picture url"
-                        className="input input-bordered input-md"
-                      />
-                    </label>
-                  </div>
-
-                  <div className="">
-                    <label className="input-group input-group-md">
-                      <span>
-                        <IoLogoApple />
-                      </span>
-
-                      <input
-                        required
-                        type="text"
-                        name="companyLogo"
-                        placeholder="Company Logo url"
-                        className="input input-bordered input-md"
-                      />
-                    </label>
-                  </div>
-
-                  <div className="flex flex-col"></div>
-
-                  <button
-                    type="submit"
-                    className=" w-[65%] self-center rounded-md border bg-blue-200 border-transparent  px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={closeModal}
-                  >
-                    Add new Member
-                  </button>
-                </div>
                 </form>
-
               </Dialog.Panel>
             </Transition.Child>
           </div>

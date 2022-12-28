@@ -138,7 +138,6 @@ app.get("/getMembers", authMiddle, (req, res) => {
 
 app.get("/getRemainingMembers", authMiddle, (req, res) => {
   let data = JSON.parse(fs.readFileSync("data.json"));
-
   const group = data.groups.find(
     (group) => group.id == req.query.groupId
   ).subGroups;
@@ -342,8 +341,8 @@ app.post("/addGroup", authMiddle, (req, res) => {
 
   const groupName = req.body.groupName;
 
-  const group = data.groups;
-  const duplicate = group.find((group) => group.name == groupName);
+  const groups = data.groups;
+  const duplicate = groups.find((group) => group.name == groupName);
 
   if (!duplicate) {
     fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
@@ -351,12 +350,21 @@ app.post("/addGroup", authMiddle, (req, res) => {
         console.log(err);
       } else {
         obj = JSON.parse(data);
+
         const group = {
           id: uuidv4(),
           owner: "1",
           name: groupName,
           subGroups: [],
         };
+        if (groups.length == 0) {
+          group.subGroups.push({
+            id: uuidv4(),
+            parent: groupName,
+            name: groupName,
+            membersId: [],
+          });
+        }
 
         obj.groups.push(group);
 
@@ -473,8 +481,17 @@ app.delete("/removeSubGroup", authMiddle, (req, res) => {
   const subGroupId = req.body.subGroupId;
 
   const group = data.groups.find((group) => group.id == groupId).subGroups;
+  const groupName = data.groups.find((group) => group.id == groupId).name; 
 
   const index = group.findIndex((subgroup) => subgroup.id == subGroupId);
+  var remainsSubgroup = false;
+
+  data.groups.forEach((group) => {
+    if(group.subGroups.length >= 1 && group.id != groupId){
+      remainsSubgroup = true;
+      return;
+    }
+  })
 
   if (index !== -1) {
     fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
@@ -486,6 +503,17 @@ app.delete("/removeSubGroup", authMiddle, (req, res) => {
         obj.groups
           .find((group) => group.id == groupId)
           .subGroups.splice(index, 1);
+        
+        if (!remainsSubgroup) {
+          obj.groups
+          .find((group) => group.id == groupId)
+          .subGroups.push({
+            id: uuidv4(),
+            parent: groupName,
+            name: "default",
+            membersId: [],
+          })
+        }
 
         json = JSON.stringify(obj);
         fs.writeFile("data.json", json, "utf8", (err) => {
