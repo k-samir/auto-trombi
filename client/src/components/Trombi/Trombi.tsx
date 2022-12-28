@@ -20,7 +20,7 @@ const Trombi = (props: Props) => {
   const members = useGetMembers(selectedSubGroup.membersId);
 
     return (
-      <div className={`rounded-md border border-1 ${className}`}>
+      <div className={`rounded-md border border-1  bg-neutral/50  ${className}`}>
         <div className="w-full pl-5 text-sm breadcrumbs rounded-t flex flex-1 bg-base-100">
           <ul>
             <li>{selectedSubGroup.parent}</li>
@@ -52,9 +52,6 @@ const Trombi = (props: Props) => {
         </div>
       </div>
     );
-  
-
- 
 };
 
 export default Trombi;

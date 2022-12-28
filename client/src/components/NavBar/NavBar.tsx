@@ -68,14 +68,14 @@ const NavBar = (props: Props) => {
             <>
               <Link
                 to="/login"
-                className="text-white border-[1px] rounded-md hover:/40 capitalize px-2 flex flex-1  whitespace-nowrap items-center	"
+                className="text-white border-[1px] rounded-md capitalize px-2 flex flex-1 my-btn whitespace-nowrap items-center	"
               >
                 Sign in
               </Link>
 
               <Link
                 to="/signup"
-                className=" text-white border-[1px] rounded-md hover:/40 capitalize px-2 py-1 flex flex-1 whitespace-nowrap items-center"
+                className=" text-white border-[1px] rounded-md  capitalize px-2 py-1 flex flex-1 my-btn whitespace-nowrap items-center"
               >
                 Sign up
               </Link>

@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-      <div className="flex justify-center bg-neutral">
+      <div className="flex justify-center bg-gradient-to-r from-sky-500 to-blue-500 ">
         <Wrapper>
           <div className="flex flex-1 centered">
             <Routes>
@@ -30,6 +30,7 @@ const App = () => {
            
             </Routes>
           </div>
+        
         </Wrapper>
       </div>
     </Auth.Provider>

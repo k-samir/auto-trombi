@@ -16,10 +16,19 @@ const Dashboard = () => {
   const [groups, refetch] = useGetGroups(setSelectedGroup, setSelectedSubGroup);
 
   useEffect(() => {
-    if (!selectedSubGroup.id && !selectedGroup.id && groups[0]) {
-      setSelectedGroup(groups[0]);
-      setSelectedSubGroup(groups[0].subGroups[0]);
-    }
+    // select the first subgroup found and its group
+    if (!selectedSubGroup.id && !selectedGroup.id) {
+      // chercher le premier sous-goupe
+      for(let i =0;i<groups.length;i++){
+        if (groups[i].subGroups.length > 0) {
+          console.log(groups[i].name);
+          setSelectedGroup(groups[i]);
+          setSelectedSubGroup(groups[i].subGroups[0]);
+          return;
+        }
+      }
+   }
+    
     if(selectedGroup.id && selectedSubGroup.id){
       setSelectedGroup(groups.find((group:Group) => group.id === selectedGroup.id) as Group);
       setSelectedSubGroup(groups.find((group:Group) => group.id === selectedGroup.id)?.subGroups.find((subGroup:SubGroup) => subGroup.id === selectedSubGroup.id) as SubGroup);

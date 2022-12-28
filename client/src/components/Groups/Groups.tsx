@@ -19,24 +19,28 @@ type Props = {
   className?: string;
 };
 const Groups = (props: Props) => {
-  const { groups, refetch,className } = props;
+  const { groups, refetch, className } = props;
 
   const [addSubGroupModalIsOpen, setAddSubGroupModalOpen] = useState(false);
   const [addGroupModalIsOpen, setAddGroupModalOpen] = useState(false);
   const [removeGroupModalIsOpen, setRemoveGroupModalOpen] = useState(false);
-  const [removeSubGroupModalIsOpen, setRemoveSubGroupModalOpen] = useState(false);
-   
-  const { setSelectedGroup } = useContext(SelectedGroup);
-  const { selectedSubGroup,setSelectedSubGroup } = useContext(SelectedSubGroup);
+  const [removeSubGroupModalIsOpen, setRemoveSubGroupModalOpen] =
+    useState(false);
 
-  const [chosenGroup,setChosenGroup] = useState<Group>({} as Group);
-  const [chosenSubGroup,setChosenSubGroup] = useState<SubGroup>({} as SubGroup);
+  const { setSelectedGroup } = useContext(SelectedGroup);
+  const { selectedSubGroup, setSelectedSubGroup } =
+    useContext(SelectedSubGroup);
+
+  const [chosenGroup, setChosenGroup] = useState<Group>({} as Group);
+  const [chosenSubGroup, setChosenSubGroup] = useState<SubGroup>(
+    {} as SubGroup
+  );
 
   const handleSelectedChange = (group: Group, subgroup: SubGroup) => {
     setSelectedGroup(group);
     setSelectedSubGroup(subgroup);
-  }
-  
+  };
+
   // ADD GROUP MODAL
   const closeAddGroupModal = () => {
     setAddGroupModalOpen(false);
@@ -49,12 +53,12 @@ const Groups = (props: Props) => {
   const closeAddSubGroupModal = () => {
     setAddSubGroupModalOpen(false);
   };
-  const openAddSubGroupModal = (group:Group) => {
+  const openAddSubGroupModal = (group: Group) => {
     setChosenGroup(group);
     setAddSubGroupModalOpen(true);
   };
   // REMOVE GROUP MODAL
-  const openRemoveGroupModal = (group:Group) => {
+  const openRemoveGroupModal = (group: Group) => {
     setChosenGroup(group);
     setRemoveGroupModalOpen(true);
   };
@@ -62,7 +66,7 @@ const Groups = (props: Props) => {
     setRemoveGroupModalOpen(false);
   };
   // REMOVE SUBGROUP MODAL
-  const openRemoveSubGroupModal = (group:Group,subGroup:SubGroup) => {
+  const openRemoveSubGroupModal = (group: Group, subGroup: SubGroup) => {
     setChosenGroup(group);
     setChosenSubGroup(subGroup);
     setRemoveSubGroupModalOpen(true);
@@ -72,7 +76,9 @@ const Groups = (props: Props) => {
   };
 
   return (
-    <div className={`flex flex-1 flex-col overflow-auto scrollbar-hide items-stretch top-[75px] z-2 ${className}`}>
+    <div
+      className={`flex flex-1 flex-col overflow-auto scrollbar-hide items-stretch top-[75px] z-2 ${className}`}
+    >
       <div className="w-full ">
         <div className="mx-auto w-full max-w-md rounded-2xl p-2">
           <ul className="menu menu-compact  lg:menu-normal flex flex-1  bg-base-100">
@@ -91,13 +97,13 @@ const Groups = (props: Props) => {
                                 onClick={() => openRemoveGroupModal(group)}
                               />
                             )}
-                                 <RemoveGroupModal
-                                    refetch={refetch}
-                                    show={removeGroupModalIsOpen}
-                                    groupId={chosenGroup.id}
-                                    closeModal={closeRemoveGroupModal}
-                                    groupName={chosenGroup.name}
-                                    />
+                            <RemoveGroupModal
+                              refetch={refetch}
+                              show={removeGroupModalIsOpen}
+                              groupId={chosenGroup.id}
+                              closeModal={closeRemoveGroupModal}
+                              groupName={chosenGroup.name}
+                            />
 
                             <FiChevronUp
                               className={`${
@@ -122,8 +128,11 @@ const Groups = (props: Props) => {
                                   <a className="text-sm">{sb.name}</a>
                                   <FaTimes
                                     className="hover:fill-red-500 hover:cursor-pointer"
-                                    onClick={() => openRemoveSubGroupModal(group,sb)}/>
-                                  <RemoveSubGroupModal 
+                                    onClick={() =>
+                                      openRemoveSubGroupModal(group, sb)
+                                    }
+                                  />
+                                  <RemoveSubGroupModal
                                     refetch={refetch}
                                     show={removeSubGroupModalIsOpen}
                                     groupId={chosenGroup.id}
@@ -136,7 +145,6 @@ const Groups = (props: Props) => {
                               </li>
                             </Disclosure.Panel>
                           );
-
                         })}
                         <Disclosure.Panel>
                           <li className="text-sm">
@@ -164,8 +172,9 @@ const Groups = (props: Props) => {
             })}
           </ul>
 
-          <div className="divider text-white fill-white">OR</div>
-
+          {groups.length > 0 && (
+            <div className="divider text-white fill-white">OR</div>
+          )}
           <div className="bg-white rounded-md">
             <a
               className="flex flex-1 border border-1 p-2 gap-2 rounded-md my-btn"
