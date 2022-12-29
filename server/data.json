@@ -1,13 +1,5 @@
 {
-  "users": [
-    {
-      "id": "f669ec10-fe48-4133-895f-f748e06f84a8",
-      "firstname": "admin",
-      "lastname": "admin",
-      "username": "admin",
-      "password": "admin"
-    }
-  ],
+  "users": [],
   "groups": [
     {
       "id": "344ec95b-af2a-412f-afdd-b677e095ef7a",
