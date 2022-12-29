@@ -1,0 +1,459 @@
+{
+  "users": [
+    {
+      "id": "01d924a9-db7f-40f2-bd49-38502063b32b",
+      "firstname": "admin",
+      "lastname": "admin",
+      "username": "admin",
+      "password": "admin"
+    }
+  ],
+  "groups": [
+    {
+      "id": "9cd96ad4-fbaa-4e17-9cac-da8bb8554c99",
+      "owner": "1",
+      "name": "FINAL WC 2022",
+      "subGroups": [
+        {
+          "id": "b4468f08-20ca-42e0-ba29-765c132619e0",
+          "parent": "FIFA WC 2022",
+          "name": "France",
+          "membersId": [
+            "5b4a1b38-d510-46e3-8d5b-10b929718a2f",
+            "e26acc70-bba1-46be-a255-edf34dfe0c20",
+            "f092b53a-a4e1-41f6-b20e-802dcbbdf324",
+            "81b6056f-7113-4da4-958b-2225be1c4288",
+            "1f70193e-42c4-464d-9c5e-9b9e59b982c3",
+            "031615c6-2c14-4770-8748-f29011a840a0",
+            "3cb36b95-c6f2-45d0-adf2-bfad81d4652f",
+            "0dab41fd-bf7a-4218-8df1-22c4f4916b0c",
+            "2a5e4155-e59b-4041-a223-7ccad5da8725",
+            "bd711afb-e76a-4ea6-9e66-311b75a556e4",
+            "d5a625dc-af26-43f6-8f5b-0f1d42f58b5d"
+          ]
+        },
+        {
+          "id": "749e7f34-a19d-43e3-b006-aec90d900a23",
+          "parent": "FIFA WC 2022",
+          "name": "Argentina",
+          "membersId": [
+            "c059c30d-5dfc-4ece-afe6-04e94dd19495",
+            "19d56aca-6a40-46c1-ab81-c18bee6440c7",
+            "f358df07-57ff-4d86-909e-076312dd6fcd",
+            "3481f6bb-44d0-4894-a079-8df7b459aef0",
+            "ec725b2e-0bf2-403c-8627-5e276a7cf526",
+            "8ed80697-9583-4b69-b64d-fdbaed169a15",
+            "7181325a-deb4-47b7-8b17-832e796630e9",
+            "0a46dbbf-07e2-4932-88aa-72e3c90d50bc",
+            "482c8461-72dc-4bd8-a50d-79f728696cdc",
+            "23932f6d-4755-4464-9bab-280330d22a74",
+            "90a61ba6-84e9-49f0-a502-3c0cc7d6ac3a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e4dda666-105a-4bb6-95eb-2ed4fd1d7823",
+      "owner": "1",
+      "name": "FINAL C1 2021/22",
+      "subGroups": [
+        {
+          "id": "689821cb-9340-4850-a659-e1f3d3de3d12",
+          "parent": "FINAL C1 2021/22",
+          "name": "Liverpool",
+          "membersId": [
+            "0f786b9f-a008-46a7-bce6-791af5828a2a",
+            "eafbcf01-6556-4151-98ef-2eef21b217e0",
+            "1e874128-eaf9-467a-a701-e5d5a28da019",
+            "568a2e05-4065-4202-8f61-66e79fe7a75b",
+            "dd0a474b-dcdd-4039-8b75-aecd7df68713",
+            "7a235681-c8c3-446c-8cb2-331cdbdc53ae",
+            "79f22064-3261-4a9f-adf3-f1605afe7c7f",
+            "bf53ad57-6d7f-4155-bda0-3b1331979b94",
+            "72e1a3a6-3ee7-4779-a31b-5e8b74a4ab11",
+            "0cedf41d-363c-434f-917b-66859243f87e",
+            "2d4aae97-f678-4d71-95b3-e40ebe8d496b"
+          ]
+        },
+        {
+          "id": "4a36e69d-c17b-4cbe-897f-46fb310a63b7",
+          "parent": "FINAL C1 2021/22",
+          "name": "Real Madrid",
+          "membersId": [
+            "eeecf0ed-5984-48ab-bf8f-6b1197bd3959",
+            "0a132b6d-feba-4fcd-8d46-d363dcd29f85",
+            "16703690-e3f0-425d-8d7d-cc796a1f68af",
+            "f943cbe0-787f-4d8d-87b6-fbfd9ee93b38",
+            "956f3c71-3276-4e89-824c-39b3ed28b25c",
+            "524d83a3-342b-45a3-be27-b722edd6f3a5",
+            "e746030a-f29a-43ed-a40b-0d520ce0b596",
+            "ba9f7750-7d90-45e3-98c9-459830f7da79",
+            "f022c75e-2559-423e-9c8a-47528e564056",
+            "75cc43a2-e361-4c60-bb34-77b938cca824",
+            "4bd141b5-732f-4efd-9334-eb04b90dcb83"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0245fdee-5a9e-4d1b-90aa-39a35870b9e8",
+      "owner": "1",
+      "name": "test",
+      "subGroups": []
+    }
+  ],
+  "members": [
+    {
+      "id": "5b4a1b38-d510-46e3-8d5b-10b929718a2f",
+      "firstname": "Hugo",
+      "lastname": "LLORIS",
+      "company": "Tottenham ",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_13/13203.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/448.png"
+    },
+    {
+      "id": "e26acc70-bba1-46be-a255-edf34dfe0c20",
+      "firstname": "Raphaël",
+      "lastname": "VARANE",
+      "company": "Manchester United",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_114/114034.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/386.png"
+    },
+    {
+      "id": "f092b53a-a4e1-41f6-b20e-802dcbbdf324",
+      "firstname": "Jules",
+      "lastname": "KOUNDE",
+      "company": "FC Barcelone",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_282/282291.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/400.png"
+    },
+    {
+      "id": "81b6056f-7113-4da4-958b-2225be1c4288",
+      "firstname": "Dayot",
+      "lastname": "UPAMECANO",
+      "company": "Bayern Munich",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_268/268186.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/401.png"
+    },
+    {
+      "id": "1f70193e-42c4-464d-9c5e-9b9e59b982c3",
+      "firstname": "Theo",
+      "lastname": "HERNANDEZ",
+      "company": "AC Milan",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_243/243395.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/363.png"
+    },
+    {
+      "id": "031615c6-2c14-4770-8748-f29011a840a0",
+      "firstname": "Antoine",
+      "lastname": "GRIEZMANN",
+      "company": "Atlético Madrid",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_82/82457.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/547.png"
+    },
+    {
+      "id": "3cb36b95-c6f2-45d0-adf2-bfad81d4652f",
+      "firstname": "Aurelien",
+      "lastname": "TCHOUAMENI",
+      "company": "Real Madrid",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_332/332186.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/384.png"
+    },
+    {
+      "id": "0dab41fd-bf7a-4218-8df1-22c4f4916b0c",
+      "firstname": " Adrien",
+      "lastname": "RABIOT",
+      "company": "Juventus Turin",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_167/167000.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/372.png"
+    },
+    {
+      "id": "2a5e4155-e59b-4041-a223-7ccad5da8725",
+      "firstname": "Olivier",
+      "lastname": "GIROUD",
+      "company": "AC Milan",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_16/16803.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/363.png"
+    },
+    {
+      "id": "bd711afb-e76a-4ea6-9e66-311b75a556e4",
+      "firstname": "Kylian",
+      "lastname": "MBAPPE",
+      "company": "Paris S-G",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_250/250043.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/362.png"
+    },
+    {
+      "id": "d5a625dc-af26-43f6-8f5b-0f1d42f58b5d",
+      "firstname": "Ousmane",
+      "lastname": "DEMBELE",
+      "company": "FC Barcelone",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_247/247255.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/400.png"
+    },
+    {
+      "id": "c059c30d-5dfc-4ece-afe6-04e94dd19495",
+      "firstname": "Emiliano ",
+      "lastname": "MARTINEZ",
+      "company": "Aston Villa",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_150/150335.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/442.png"
+    },
+    {
+      "id": "19d56aca-6a40-46c1-ab81-c18bee6440c7",
+      "firstname": "Nicolás",
+      "lastname": "TAGLIAFICO",
+      "company": "Lyon",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_133/133400.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/383.png"
+    },
+    {
+      "id": "f358df07-57ff-4d86-909e-076312dd6fcd",
+      "firstname": "Cristian",
+      "lastname": "ROMERO",
+      "company": "Tottenham",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_304/304280.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/448.png"
+    },
+    {
+      "id": "3481f6bb-44d0-4894-a079-8df7b459aef0",
+      "firstname": "Nicolás",
+      "lastname": "OTAMENDI",
+      "company": "Benfica",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/a_35/35838.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/429.png"
+    },
+    {
+      "id": "ec725b2e-0bf2-403c-8627-5e276a7cf526",
+      "firstname": "Nahuel",
+      "lastname": "MOLINA",
+      "company": "Atlético Madrid",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_187/187734.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/547.png"
+    },
+    {
+      "id": "8ed80697-9583-4b69-b64d-fdbaed169a15",
+      "firstname": "Rodrigo",
+      "lastname": "DE PAUL",
+      "company": "Atlético Madrid",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_193/193130.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/547.png"
+    },
+    {
+      "id": "7181325a-deb4-47b7-8b17-832e796630e9",
+      "firstname": "Alexis",
+      "lastname": "MAC ALLISTER",
+      "company": "Brighton & Hove",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_309/309971.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_1/1512.png"
+    },
+    {
+      "id": "0a46dbbf-07e2-4932-88aa-72e3c90d50bc",
+      "firstname": "Enzo",
+      "lastname": "FERNANDEZ",
+      "company": "Benfica",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/a_375/375220.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/429.png"
+    },
+    {
+      "id": "482c8461-72dc-4bd8-a50d-79f728696cdc",
+      "firstname": "Julian ",
+      "lastname": "ALVAREZ",
+      "company": "Manchester City",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_370/370714.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/464.png"
+    },
+    {
+      "id": "23932f6d-4755-4464-9bab-280330d22a74",
+      "firstname": "Lionel",
+      "lastname": "MESSI",
+      "company": "Paris S-G",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_10/10973.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/362.png"
+    },
+    {
+      "id": "90a61ba6-84e9-49f0-a502-3c0cc7d6ac3a",
+      "firstname": "Ángel",
+      "lastname": "DI MARÍA",
+      "company": "Juventus Turin",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2022/a_21/21136.jpg",
+      "companyLogo": "https://www.footballdatabase.eu/images/photos/clubs/a_0/372.png"
+    },
+    {
+      "id": "eeecf0ed-5984-48ab-bf8f-6b1197bd3959",
+      "firstname": "Thibaut",
+      "lastname": "COURTOIS",
+      "company": "Belgique",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_65/65793.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/be.png"
+    },
+    {
+      "id": "0a132b6d-feba-4fcd-8d46-d363dcd29f85",
+      "firstname": "Éder",
+      "lastname": "MILITAO",
+      "company": "Brasil",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_322/322148.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/br.webp"
+    },
+    {
+      "id": "16703690-e3f0-425d-8d7d-cc796a1f68af",
+      "firstname": "Ferland",
+      "lastname": "MENDY",
+      "company": "France",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_210/210180.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/fr.png"
+    },
+    {
+      "id": "f943cbe0-787f-4d8d-87b6-fbfd9ee93b38",
+      "firstname": "David",
+      "lastname": "ALABA",
+      "company": "Austria",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_85/85554.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/at.png"
+    },
+    {
+      "id": "956f3c71-3276-4e89-824c-39b3ed28b25c",
+      "firstname": "Dani",
+      "lastname": "CARVAJAL",
+      "company": "Spain",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_126/126153.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/es.webp"
+    },
+    {
+      "id": "524d83a3-342b-45a3-be27-b722edd6f3a5",
+      "firstname": " ",
+      "lastname": "CASEMIRO",
+      "company": "Brasil",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_113/113581.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/br.webp"
+    },
+    {
+      "id": "e746030a-f29a-43ed-a40b-0d520ce0b596",
+      "firstname": "Federico",
+      "lastname": "VALVERDE",
+      "company": "Uruguay",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_271/271802.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/uy.webp"
+    },
+    {
+      "id": "ba9f7750-7d90-45e3-98c9-459830f7da79",
+      "firstname": "Luka",
+      "lastname": "MODRIC",
+      "company": "Croatia",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_14/14377.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/hr.webp"
+    },
+    {
+      "id": "f022c75e-2559-423e-9c8a-47528e564056",
+      "firstname": "Toni",
+      "lastname": "KROOS",
+      "company": "Germany",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_23/23132.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/de.png"
+    },
+    {
+      "id": "75cc43a2-e361-4c60-bb34-77b938cca824",
+      "firstname": "Vinicius",
+      "lastname": "JÚNIOR",
+      "company": "Brasil",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_320/320787.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/br.webp"
+    },
+    {
+      "id": "4bd141b5-732f-4efd-9334-eb04b90dcb83",
+      "firstname": "Karim",
+      "lastname": "BENZEMA",
+      "company": "France",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_11/11490.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/fr.png"
+    },
+    {
+      "id": "0f786b9f-a008-46a7-bce6-791af5828a2a",
+      "firstname": "Alisson ",
+      "lastname": "BECKER",
+      "company": "Brasil",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_194/194820.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/br.webp"
+    },
+    {
+      "id": "eafbcf01-6556-4151-98ef-2eef21b217e0",
+      "firstname": "Virgil",
+      "lastname": "VAN DIJK",
+      "company": "Netherlands",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_137/137796.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/nl.png"
+    },
+    {
+      "id": "1e874128-eaf9-467a-a701-e5d5a28da019",
+      "firstname": "Ibrahima",
+      "lastname": "KONATÉ",
+      "company": "France",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_309/309365.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/fr.png"
+    },
+    {
+      "id": "568a2e05-4065-4202-8f61-66e79fe7a75b",
+      "firstname": "Trent",
+      "lastname": "ALEXANDER-ARNOLD",
+      "company": "England",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_249/249639.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/gb-eng.png"
+    },
+    {
+      "id": "dd0a474b-dcdd-4039-8b75-aecd7df68713",
+      "firstname": "Andrew",
+      "lastname": "ROBERTSON",
+      "company": "Scotland",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_200/200227.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/gb-sct.webp"
+    },
+    {
+      "id": "7a235681-c8c3-446c-8cb2-331cdbdc53ae",
+      "firstname": " ",
+      "lastname": "FABINHO",
+      "company": "Brasil",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_170/170489.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/br.webp"
+    },
+    {
+      "id": "79f22064-3261-4a9f-adf3-f1605afe7c7f",
+      "firstname": "Thiago",
+      "lastname": "ALCÁNTARA",
+      "company": "Spain",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_70/70185.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/es.webp"
+    },
+    {
+      "id": "bf53ad57-6d7f-4155-bda0-3b1331979b94",
+      "firstname": "Jordan",
+      "lastname": "HENDERSON",
+      "company": "England",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_48/48220.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/gb-eng.png"
+    },
+    {
+      "id": "72e1a3a6-3ee7-4779-a31b-5e8b74a4ab11",
+      "firstname": "Luis",
+      "lastname": "DÍAZ",
+      "company": "Colombia",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_291/291576_1.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/co.webp"
+    },
+    {
+      "id": "0cedf41d-363c-434f-917b-66859243f87e",
+      "firstname": "Mohamed",
+      "lastname": "SALAH",
+      "company": "Egypt",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_69/69529.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/eg.webp"
+    },
+    {
+      "id": "2d4aae97-f678-4d71-95b3-e40ebe8d496b",
+      "firstname": "Sadio",
+      "lastname": "MANÉ",
+      "company": "Sénégal",
+      "picture": "https://www.footballdatabase.eu/images/photos/players/2021-2022/a_145/145917.jpg",
+      "companyLogo": "https://www.drapeauxdespays.fr/data/flags/w702/sn.webp"
+    }
+  ]
+}

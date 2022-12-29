@@ -21,7 +21,6 @@ const Dashboard = () => {
       // chercher le premier sous-goupe
       for(let i =0;i<groups.length;i++){
         if (groups[i].subGroups.length > 0) {
-          console.log(groups[i].name);
           setSelectedGroup(groups[i]);
           setSelectedSubGroup(groups[i].subGroups[0]);
           return;

@@ -27,7 +27,7 @@ const generateToken = (user) => {
 };
 
 app.post("/login", (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (!req.body.username || !req.body.password) {
     return res.status(400).json({
@@ -49,7 +49,7 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/signup", (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (
     !req.body.firstname ||
@@ -77,14 +77,14 @@ app.post("/signup", (req, res) => {
       password: req.body.credentials.password.value,
     };
 
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
         obj = JSON.parse(data);
         obj.users.push(user);
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(user.username + " added successfully");
@@ -100,7 +100,7 @@ app.post("/signup", (req, res) => {
 });
 
 app.get("/getUser", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
   const user = data.users.find((user) => user.id == req.query.id);
 
   if (user) {
@@ -113,7 +113,7 @@ app.get("/getUser", authMiddle, (req, res) => {
 });
 
 app.get("/getMember", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
   const member = data.members.find((member) => member.id == req.query.id);
 
   if (member) {
@@ -125,7 +125,7 @@ app.get("/getMember", authMiddle, (req, res) => {
 });
 
 app.get("/getMembers", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
   const membersId = req.query.membersId.split(",");
   let members = [];
   membersId.forEach((memberId) => {
@@ -137,7 +137,7 @@ app.get("/getMembers", authMiddle, (req, res) => {
 });
 
 app.get("/getRemainingMembers", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
   const group = data.groups.find(
     (group) => group.id == req.query.groupId
   ).subGroups;
@@ -159,7 +159,7 @@ app.get("/getRemainingMembers", authMiddle, (req, res) => {
 });
 
 app.get("/getGroups", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   const groups = data.groups;
   if (groups) {
@@ -171,7 +171,7 @@ app.get("/getGroups", authMiddle, (req, res) => {
 });
 
 app.post("/addNewMemberToSubGroup", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (
     !req.body.firstname ||
@@ -202,7 +202,7 @@ app.post("/addNewMemberToSubGroup", authMiddle, (req, res) => {
   );
 
   if (!duplicate) {
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -223,7 +223,7 @@ app.post("/addNewMemberToSubGroup", authMiddle, (req, res) => {
           .membersId.push(memberId);
 
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(firstname + " " + lastname + " added successfully");
@@ -237,7 +237,7 @@ app.post("/addNewMemberToSubGroup", authMiddle, (req, res) => {
 });
 
 app.post("/addExistingMemberToSubGroup", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (!req.body.groupId || !req.body.memberId || !req.body.subGroupId) {
     return res.status(400).json({
@@ -257,7 +257,7 @@ app.post("/addExistingMemberToSubGroup", authMiddle, (req, res) => {
   const duplicate = memberInSubGroup.find((member) => member.id == memberId);
 
   if (!duplicate) {
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -267,7 +267,7 @@ app.post("/addExistingMemberToSubGroup", authMiddle, (req, res) => {
           .subGroups.find((subGroup) => subGroup.id == subGroupId)
           .membersId.push(memberId);
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(memberId + " added successfully");
@@ -283,7 +283,7 @@ app.post("/addExistingMemberToSubGroup", authMiddle, (req, res) => {
 });
 
 app.post("/addSubGroup", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (!req.body.subgroupName || !req.body.groupId) {
     return res.status(400).json({
@@ -299,7 +299,7 @@ app.post("/addSubGroup", authMiddle, (req, res) => {
   const duplicate = group.find((subgroup) => subgroup.name == subgroupName);
 
   if (!duplicate) {
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -316,7 +316,7 @@ app.post("/addSubGroup", authMiddle, (req, res) => {
           .subGroups.push(subGroup);
 
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(subgroupName + " added successfully");
@@ -331,7 +331,7 @@ app.post("/addSubGroup", authMiddle, (req, res) => {
 });
 
 app.post("/addGroup", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (!req.body.groupName) {
     return res.status(400).json({
@@ -345,7 +345,7 @@ app.post("/addGroup", authMiddle, (req, res) => {
   const duplicate = groups.find((group) => group.name == groupName);
 
   if (!duplicate) {
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -369,7 +369,7 @@ app.post("/addGroup", authMiddle, (req, res) => {
         obj.groups.push(group);
 
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(groupName + " added successfully");
@@ -384,7 +384,7 @@ app.post("/addGroup", authMiddle, (req, res) => {
 });
 
 app.delete("/removeMemberFromSubGroup", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (!req.body.memberId || !req.body.groupId || !req.body.subGroupId) {
     return res.status(400).json({
@@ -404,7 +404,7 @@ app.delete("/removeMemberFromSubGroup", authMiddle, (req, res) => {
   const index = memberInSubGroup.indexOf(memberId);
 
   if (index !== -1) {
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -422,7 +422,7 @@ app.delete("/removeMemberFromSubGroup", authMiddle, (req, res) => {
           .membersId.splice(index, 1);
 
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(memberId + " removed successfully");
@@ -441,13 +441,13 @@ app.delete("/removeGroup", authMiddle, (req, res) => {
       message: "Error. Please make sure all fields are filled in correctly",
     });
   }
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   const groupId = req.body.groupId;
   const index = data.groups.findIndex((group) => group.id == groupId);
 
   if (index !== -1) {
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -455,7 +455,7 @@ app.delete("/removeGroup", authMiddle, (req, res) => {
         obj.groups.splice(index, 1);
 
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(groupId + " removed successfully");
@@ -469,7 +469,7 @@ app.delete("/removeGroup", authMiddle, (req, res) => {
 });
 
 app.delete("/removeSubGroup", authMiddle, (req, res) => {
-  let data = JSON.parse(fs.readFileSync("data.json"));
+  let data = JSON.parse(fs.readFileSync(process.env.DATA));
 
   if (!req.body.groupId || !req.body.subGroupId) {
     return res.status(400).json({
@@ -481,20 +481,24 @@ app.delete("/removeSubGroup", authMiddle, (req, res) => {
   const subGroupId = req.body.subGroupId;
 
   const group = data.groups.find((group) => group.id == groupId).subGroups;
-  const groupName = data.groups.find((group) => group.id == groupId).name; 
+  const groupName = data.groups.find((group) => group.id == groupId).name;
 
   const index = group.findIndex((subgroup) => subgroup.id == subGroupId);
   var remainsSubgroup = false;
 
-  data.groups.forEach((group) => {
-    if(group.subGroups.length >= 1 && group.id != groupId){
-      remainsSubgroup = true;
-      return;
+   data.groups.forEach((group) => {
+    if(group.subGroups.length >= 1){
+      group.subGroups.forEach((subgroup) => {
+        if (subgroup.id != subGroupId) {
+          remainsSubgroup = true;
+          return;
+        }
+      })
     }
   })
 
   if (index !== -1) {
-    fs.readFile("data.json", "utf8", function readFileCallback(err, data) {
+    fs.readFile(process.env.DATA, "utf8", function readFileCallback(err, data) {
       if (err) {
         console.log(err);
       } else {
@@ -503,20 +507,21 @@ app.delete("/removeSubGroup", authMiddle, (req, res) => {
         obj.groups
           .find((group) => group.id == groupId)
           .subGroups.splice(index, 1);
-        
+
         if (!remainsSubgroup) {
+          console.log("adding remains", remainsSubgroup);
           obj.groups
-          .find((group) => group.id == groupId)
-          .subGroups.push({
-            id: uuidv4(),
-            parent: groupName,
-            name: "default",
-            membersId: [],
-          })
+            .find((group) => group.id == groupId)
+            .subGroups.push({
+              id: uuidv4(),
+              parent: groupName,
+              name: "default",
+              membersId: [],
+            });
         }
 
         json = JSON.stringify(obj);
-        fs.writeFile("data.json", json, "utf8", (err) => {
+        fs.writeFile(process.env.DATA, json, "utf8", (err) => {
           if (err) console.log(err);
           else {
             console.log(subGroupId + " removed successfully");
