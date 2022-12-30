@@ -3,7 +3,7 @@
 
 <div align="center">
   <picture>
-    <img src="https://github.com/k-samir/auto-trombi/blob/main/img/auto-trombi.png" width="280" alt="Logo"/>
+    <img src="https://github.com/k-samir/auto-trombi/blob/main/img/auto-trombi.png" width="250" alt="Logo"/>
   </picture>
   
   <h3 align="center">A simple application to create a trombinoscope</h3>
