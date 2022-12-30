@@ -21,7 +21,7 @@ const generateToken = (user) => {
       id: user.id,
     },
     process.env.SECRET_KEY,
-    { expiresIn: "2 hours" }
+    { expiresIn: process.env.EXPIRATION_TIME }
   );
   return token;
 };
